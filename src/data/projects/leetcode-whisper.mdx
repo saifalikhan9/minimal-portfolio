@@ -1,0 +1,157 @@
+---
+title: "LeetCode Whisper – Chrome Extension"
+description: "A Chrome extension that provides AI-generated hints for LeetCode problems without revealing full solutions."
+date: "2025-01-01"
+tags:
+  ["Chrome Extension", "TypeScript", "React", "Vite", "LLM", "Developer Tools"]
+timeline: 1 month
+role: "Full Stack"
+team: "Solo"
+status: "Completed"
+liveLink: ""
+imageUrl: "https://saifalikhan99.vercel.app/_next/image?url=%2Fimages%2Fextention.jpg&w=1920&q=75"
+githubLink: "https://github.com/saifalikhan9/Extention"
+---
+
+## Overview
+
+**LeetCode Whisper** is a Chrome extension built to help developers solve problems on LeetCode **without giving away the final solution**.
+Instead of returning full answers or code, the extension generates **context-aware hints, approach-level guidance, and edge-case prompts**, allowing users to stay engaged with the actual problem-solving process.
+
+The project focuses on **responsible AI usage** in developer tooling, where the model behaves like a mentor that _nudges_ the user forward rather than solving the problem for them.
+
+---
+
+## Motivation
+
+Most AI coding tools instantly provide complete solutions, which often leads to:
+
+- Reduced problem-solving ability
+- Shallow understanding of algorithms
+- Over-dependence on generated code
+
+LeetCode Whisper intentionally avoids that pattern by:
+
+- Blocking full solutions
+- Encouraging incremental reasoning
+- Providing just enough guidance to unblock users
+
+---
+
+## How LeetCode Whisper Works
+
+### High-Level Flow
+
+1. The user opens a LeetCode problem
+2. LeetCode Whisper reads the **problem context directly from the DOM**
+3. Extracted content is cleaned and refined
+4. The refined context is combined with the user’s query
+5. A constrained prompt is sent to an LLM
+6. The response is filtered to return **only hints and guidance**
+
+---
+
+## DOM Extraction & Context Processing
+
+The extension uses **Chrome content scripts** to access the LeetCode page and extract:
+
+- Problem description
+- Constraints
+- Input/output format
+- Example cases
+
+Before sending data to the LLM:
+
+- HTML noise is removed
+- Redundant text is stripped
+- Content is normalized into a structured format
+- Token usage is optimized to reduce API cost
+
+This ensures the model receives **high-signal input** instead of raw page content.
+
+---
+
+## Prompt Engineering Strategy
+
+The prompt design is intentionally restrictive:
+
+- ❌ No full solutions
+- ❌ No complete code snippets
+- ✅ Conceptual hints
+- ✅ Algorithmic direction
+- ✅ Edge-case awareness
+
+Typical responses include:
+
+- Suggested data structures
+- Time and space complexity considerations
+- Problem decomposition strategies
+- Common pitfalls to avoid
+
+---
+
+## Tech Stack
+
+### Frontend & UI
+
+- **React**
+- **TypeScript**
+- Component-based architecture
+- Minimal, distraction-free UI
+
+### Build System
+
+- **Vite**
+- Fast development feedback
+- Optimized production builds
+
+### Chrome Extension APIs
+
+- Content scripts for DOM access
+- Secure message passing
+- Isolated execution environments
+
+### AI Integration
+
+- LLM accessed using a **user-provided API key**
+- No keys stored or logged
+- Client-side request execution
+- Token-aware prompt construction
+
+---
+
+## Security & Privacy
+
+LeetCode Whisper is designed with privacy in mind:
+
+- Users provide **their own API token**
+- No credentials are persisted
+- No problem data is stored or tracked
+- All requests are explicitly user-initiated
+
+This makes the extension transparent, user-controlled, and privacy-first.
+
+---
+
+## 🚀 Chrome Extension Installation Guide
+
+This section explains how to install and run LeetCode Whisper locally.
+
+---
+
+## 📝 Prerequisites
+
+- **Node.js** (v14 or higher)
+- **npm**
+- **Google Chrome**
+
+---
+
+## 🔧 Installation Steps
+
+```bash
+git clone https://github.com/saifalikhan9/Extention
+cd Extention
+npm install
+npm run dev
+```

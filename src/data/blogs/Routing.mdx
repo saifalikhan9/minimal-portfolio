@@ -1,0 +1,274 @@
+---
+title: "Understanding API Routing: The “Where” Behind Every HTTP Request"
+description: "HTTP methods describe what you want to do—but routing defines where that action happens. This article breaks down backend routing concepts such as static and dynamic routes, query parameters, nested resources, API versioning, and fallback routes in a clear, story-driven way."
+date: "2026-01-18"
+author: "saif"
+---
+
+# Routing: Giving Direction to Intent in Backend Systems
+
+In the previous part of this journey, we talked about **HTTP methods**.
+We learned that methods like `GET`, `POST`, `PUT`, and `DELETE` describe **intent**.
+
+They answer one simple question:
+
+> **What do you want to do?**
+
+Do you want to fetch data? Create something new? Update existing information? Delete a resource?
+
+That is the *what* of a request. But intent alone is not enough.
+
+## Intent Without Direction Is Meaningless
+
+Imagine telling someone:
+
+> “I want to get something.”
+
+The natural response would be:
+
+> “From where?”
+
+That missing piece is handled by **routing**.
+Routing answers the **where** of a request.
+
+## What Routing Really Is
+
+Routing is the mechanism that tells the server:
+
+* Where the client wants to go
+* Which resource the action should apply to
+* Which logic should be executed
+
+In its simplest form:
+
+> **Routing maps an HTTP method + URL to server-side logic**
+
+No frameworks. No languages. Just a universal concept.
+
+## A Simple Mental Model
+
+Consider this request:
+
+```http
+GET /api/users
+
+```
+
+This reads as:
+
+* **GET** → I want to fetch data
+* **/api/users** → I want user-related data
+
+The server takes these two things:
+
+1. The **method**
+2. The **route**
+
+And maps them to a specific handler that runs business logic, talks to the database, and returns a response.
+The combination of **method + route** forms a unique identity.
+
+## Same Route, Different Intent
+
+Now look at this:
+
+```http
+POST /api/books
+
+```
+
+The route is the same as before, but the intent is different.
+
+They never clash because the server uses a **combination** to find the handler:
+```
+| Method | Route       | Resulting Action      |
+| :----- | :---------- | :-------------------- |
+| `GET`  | `/api/books`| 🟢 Fetch all books    |
+| `POST` | `/api/books`| 🔵 Create a new book  |
+```
+The server sees `GET /api/books` and `POST /api/books` as **completely different commands**—just like "Reading a book" and "Writing a book" are different actions, even if the object (the book) is the same.
+
+## Static Routes: Fixed Addresses
+
+Routes like `/api/books` and `/api/users` are called **static routes**.
+
+They are static because:
+
+* They don’t change
+* They contain no variables
+* They always point to the same resource type
+
+Static routes are predictable and form the backbone of most APIs.
+
+## Dynamic Routes: When Data Shapes the Path
+
+Now consider this request:
+
+```http
+GET /api/users/123
+
+```
+
+Here, `123` is not fixed. It’s a **dynamic value**.
+This is called a **dynamic route**, and the dynamic part is known as a **Path parameter** (or route parameter).
+
+Read it out loud:
+
+> “Get the user whose ID is 123”
+
+This readability is intentional — it’s a core REST principle.
+
+## Why Path Parameters Exist
+
+Path parameters represent **identity**. They answer questions like:
+
+* Which user?
+* Which post?
+* Which product?
+
+They are part of the route itself and define **what exact resource is being accessed**.
+
+## Query Parameters: Sending Extra Information
+
+Now consider this:
+
+```http
+GET /api/search?query=two+sum
+
+```
+
+Here:
+
+* `/api/search` is the route
+* `query=two+sum` is additional information
+
+This additional information is called a **query parameter**.
+
+```txt
+      Path (Identity)           Query (Modifier)
+   ┌───────────────────┐    ┌─────────────────────┐
+   /api/products/shoes   ?  color=red & size=10
+
+```
+
+### Why Query Parameters Exist
+
+Because **GET requests don’t have a request body**.
+Not all data belongs in the path.
+
+* **Path parameters** → Identity (The "Thing")
+* **Query parameters** → Modifiers (The "Filter")
+
+Common use cases include search values, filtering, sorting, and pagination.
+
+## Pagination: A Real-World Example
+
+Fetching books:
+
+```http
+GET /api/books
+
+```
+
+The server returns a limited list of books and metadata like total count.
+To fetch the next page:
+
+```http
+GET /api/books?page=2
+
+```
+
+The route stays the same. The query parameter modifies the response.
+That’s exactly how query parameters are meant to be used.
+
+## Nested Routes: Expressing Relationships
+
+APIs rarely deal with isolated data. Resources are connected.
+Example:
+
+```http
+GET /api/users/123/posts/456
+
+```
+
+This reads as:
+
+1. User with ID `123`
+2. Their posts
+3. A specific post with ID `456`
+
+This is called a **nested route**.
+
+```txt
+/api
+ ├── /users           (Collection)
+ │    └── /123        (Specific User)
+ │         └── /posts (Sub-Collection)
+ │              └── /456 (Specific Resource)
+
+```
+
+### Why Nested Routes Matter
+
+Nested routes express **context**. They help answer:
+
+* Whose data?
+* Related to what?
+* At what level?
+
+Each level adds meaning, not confusion.
+
+## Route Versioning: Designing for Change
+
+APIs evolve. Data formats change. Clients grow.
+That’s why **versioning** exists.
+
+```http
+/api/v1/products
+/api/v2/products
+
+```
+
+Each version represents a clear contract.
+
+### Why Versioning Is Important
+
+* Old clients continue to work
+* New clients get new structures
+* Breaking changes are controlled
+
+Eventually, older versions are deprecated and clients move forward, but the system stays stable during the transition.
+
+## Catch-All Routes: Handling the Unknown
+
+What happens when a client requests a route that doesn’t exist?
+The server has no handler for it.
+
+A **catch-all route** handles these cases by catching unmatched requests and usually responding with `404 Not Found`.
+
+This tells the client:
+
+> “This route does not exist.”
+
+## 🔗 Live Demo & Source Code
+
+To make the concepts in this article concrete, a small **backend + frontend demo** accompanies this blog.
+
+* **Live Demo:** [https://routing-demo-frontend.vercel.app/](https://routing-demo-frontend.vercel.app/)
+* **Source Code:** [https://github.com/saifalikhan9/routing-demo-backend](https://github.com/saifalikhan9/routing-demo-backend)
+
+> 💡 The demo showcases `GET`, `POST`, `PUT`, `DELETE` requests along with static routes, dynamic routes, query parameters, nested routes, and versioning.
+
+## Final Thoughts
+
+Routing is more than URL matching.
+
+It’s about:
+
+* Expressing intent clearly
+* Preserving semantic meaning
+* Designing readable APIs
+* Creating predictable systems
+
+Once routing concepts are clear, any backend codebase feels approachable. Any framework becomes familiar.
+
+Routing is where **intent meets direction** — and that’s where backend architecture truly begins.

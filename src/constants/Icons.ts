@@ -1,0 +1,16 @@
+export const IconsObject = {
+  javascript: "javascript",
+  typescript: "typescript",
+  react: "react",
+  nextjs: "nextjs",
+  framer: "framer",
+  redis: "redis",
+  express: "express",
+  gemini: "gemini",
+  mongodb: "mongodb",
+  nodejs: "nodejs",
+  razorpay: "razorpay",
+  tailwindcss: "tailwindcss",
+  prisma: "prisma",
+  postgressql: "postgressql",
+};

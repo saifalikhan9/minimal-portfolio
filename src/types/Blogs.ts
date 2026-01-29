@@ -1,0 +1,17 @@
+
+export type BlogFrontmatter = {
+  title: string;
+  description: string;
+  date: string;
+  author: string;
+};
+
+export type BlogData = {
+  content: React.ReactElement;
+  frontmatter: BlogFrontmatter;
+};
+
+export type BlogMetadata = {
+  frontmatter: BlogFrontmatter;
+  slug: string;
+};

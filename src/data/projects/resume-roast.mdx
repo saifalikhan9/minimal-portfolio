@@ -1,0 +1,72 @@
+---
+title: "Resume Roaster"
+description: "An AI-powered resume review platform that delivers humorous yet actionable feedback using modern LLMs."
+slug: "resume-roast"
+imageUrl: "https://github.com/saifalikhan9/Portfolio/blob/main/public/images/resumeRoast.png?raw=false"
+tags: ["Next.js", "AI", "Tailwind CSS"]
+timeline: "2 months"
+role: "Full Stack"
+team: "Solo"
+status: "Completed"
+liveLink: "https://roast-resume-frontend.vercel.app/"
+githubLink: "https://github.com/saifalikhan9/resume_roast_backend"
+---
+
+# Resume Roaster
+
+## Overview
+
+Resume Roaster is a full-stack web application designed to make resume reviews engaging, memorable, and actually useful. Instead of presenting dry, generic feedback, the platform uses humor and wit to point out weak sections, missing impact, and common resume mistakes—while still guiding users toward meaningful improvements.
+
+The idea behind Resume Roaster was to turn a traditionally boring process into an interactive experience that encourages users to revisit and improve their resumes rather than ignoring feedback.
+
+## Problem Statement
+
+Most resume review tools either feel too robotic or provide vague suggestions that are hard to act on. Users often skim through feedback without applying real changes. Resume Roaster addresses this problem by combining structured analysis with personality-driven responses that keep users engaged.
+
+## User Experience Flow
+
+1. Users upload their resume through a simple and clean interface  
+2. The resume content is parsed and normalized into structured sections  
+3. The AI analyzes each section individually  
+4. Users receive a roast-style review broken down into clear insights  
+5. Actionable suggestions are provided alongside humor to maintain balance  
+
+This flow ensures clarity while keeping the experience light and engaging.
+
+## Key Features
+
+- Resume upload and structured content extraction  
+- Section-wise analysis for more relevant feedback  
+- Controlled humorous tone to avoid overly harsh responses  
+- Clear separation of strengths, weaknesses, and improvements  
+- Responsive and minimal UI built for accessibility  
+
+## Technical Stack
+
+- Next.js for server-side rendering and routing  
+- AI language models for context-aware feedback generation  
+- Tailwind CSS for a clean and responsive interface  
+- TypeScript for maintainable and type-safe code  
+
+## Architecture & Logic
+
+Resume content is normalized before analysis to ensure consistent AI responses across different resume formats. Prompt logic is structured to enforce tone rules, ensuring feedback remains helpful while still maintaining a playful roasting style.
+
+This separation between parsing, prompt construction, and UI rendering helps keep the system scalable and easy to extend.
+
+## Challenges & Solutions
+
+One major challenge was maintaining consistency across AI-generated feedback. This was addressed by designing structured prompts and validating parsed resume data before analysis.
+
+Another challenge involved balancing humor with professionalism. Prompt constraints were carefully designed to ensure jokes never overshadow clarity or usefulness.
+
+## Learnings
+
+- Designing AI-driven UX requires as much product thinking as technical skill  
+- Structured inputs significantly improve output quality  
+- Humor can enhance usability when applied with boundaries  
+
+## Outcome
+
+Resume Roaster showcases strong frontend development, practical AI integration, and thoughtful UX design. The project demonstrates the ability to build user-centric products that combine entertainment with real-world utility.

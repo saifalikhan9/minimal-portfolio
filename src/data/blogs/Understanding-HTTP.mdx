@@ -1,0 +1,285 @@
+---
+title: "How Browsers Talk to Servers: A Story of HTTP, Statelessness, and CORS"
+description: "A comprehensive guide to understanding HTTP fundamentals, statelessness, CORS, and status codes - the core concepts that power 90% of real-world backend engineering."
+date: "2026-01-16"
+author: "saif"
+---
+
+# How Browsers Talk to Servers: A Story of HTTP, Statelessness, and CORS
+
+Backend engineering is vast.
+
+So vast that if we tried to explain **every possible component**, we'd probably be stuck here for years.
+Instead, this story focuses on what matters most — the concepts used in **90% of real-world codebases**.
+
+And everything begins with one thing: **HTTP**.
+
+## The Invisible Bridge: HTTP
+
+Every time you open a website, submit a form, or load data in an app, something invisible happens.
+Your **browser talks to a server**.
+That conversation happens through a protocol called **HTTP (HyperText Transfer Protocol)**.
+It's the medium through which clients send data to servers and receive data back.
+
+Yes, there are other protocols — but HTTP is the most common one.
+So we start here.
+
+## The First Core Idea: Statelessness
+
+HTTP has no memory.
+It does **not remember past interactions**.
+Each request lives alone.
+Once the server responds, it forgets everything about that request.
+
+### What does “stateless” really mean?
+
+- Every HTTP request is **self-contained**
+- The server does not remember who you are
+- The server does not remember what you did earlier
+
+If you send another request, the server treats it as a **brand-new event**.
+That means:
+
+- Authentication details
+- Tokens
+- Cookies
+- Headers
+
+👉 **All of them must be sent with every request**
+
+### A simple example
+
+Imagine requesting your profile:
+If the server doesn’t remember you, how does it know who you are?
+It doesn’t unless **you tell it every time**.
+
+So your browser sends credentials on every request.
+* **Cookies:** Often sent automatically by the browser.
+* **Tokens (JWT):** Usually must be manually attached to headers by the developer.
+
+## Why Would Anyone Design It This Way?
+
+Statelessness sounds inconvenient… but it’s powerful.
+
+### 1. Simplicity
+
+Servers don't need to store session data.
+Less memory. Less complexity.
+
+### 2. Scalability
+
+Any server can handle any request.
+No session stickiness. No special routing.
+
+### 3. Reliability
+
+If a server crashes, nothing is lost.
+There is no state to recover.
+
+### But wait…
+
+If HTTP is stateless, how do logins work?
+
+That’s where **state management techniques** come in:
+
+- Cookies
+- Sessions
+- JWTs
+
+HTTP stays stateless — **we build state on top of it**.
+
+## The Second Core Idea: Client–Server Model
+
+In HTTP, there are always two roles:
+
+- **Client** → initiates the request (browser, app)
+- **Server** → responds to the request
+
+The server never speaks first.
+
+This separation allows:
+
+- Independent scaling
+- Clear responsibilities
+- Predictable behavior
+
+## When Security Enters the Story: CORS
+
+Modern browsers are cautious.
+They follow something called the **Same-Origin Policy**.
+That means:
+
+> A webpage can only talk to the same origin it came from.
+
+Different port?
+Different domain?
+Different protocol?
+
+➡ That’s **cross-origin**.
+
+And browsers don’t allow that freely.
+
+## Simple Requests vs Preflight Requests
+
+Not all requests are treated equally.
+
+### A request is _simple_ if:
+
+- Method is `GET`, `POST`, or `HEAD`
+- No custom headers (like `Authorization`)
+- Content-Type is:
+  - `text/plain`
+  - `application/x-www-form-urlencoded`
+  - `multipart/form-data`
+
+If all conditions pass → browser sends the request directly.
+
+### When does a preflight happen?
+
+If **any one** of these is true:
+
+- Method is `PUT`, `DELETE`, etc.
+- Custom headers like `Authorization`
+- Content-Type is `application/json`
+
+The browser pauses.
+
+Before sending the real request, it asks the server:
+
+> “Are you okay with this?”
+
+## The Preflight: Asking for Permission
+
+The browser sends an **OPTIONS** request. This request is just a question; it has no body.
+
+```txt
+BROWSER                                      SERVER
+   |                                            |
+   |   1. Preflight Request (OPTIONS)           |
+   | -----------------------------------------> |
+   |   "Can I send a POST request with          |
+   |    custom headers?"                        |
+   |                                            |
+   |   2. Preflight Response                    |
+   | <----------------------------------------- |
+   |   "Yes! (Access-Control-Allow-Origin)"     |
+   |                                            |
+   |                                            |
+   |   3. Actual Request (POST)                 |
+   | -----------------------------------------> |
+   |   "Here is the data."                      |
+   |                                            |
+   |   4. Actual Response                       |
+   | <----------------------------------------- |
+   |   "Data received. Here is your JSON."      |
+   |                                            |
+
+```
+
+### Server’s responsibility
+
+If the server understands CORS, it responds with headers like:
+
+```http
+Access-Control-Allow-Origin: [https://your-site.com](https://your-site.com)
+Access-Control-Allow-Methods: GET, POST, OPTIONS
+Access-Control-Allow-Headers: Authorization, Content-Type
+Access-Control-Max-Age: 86400
+
+```
+
+If the browser is satisfied → the **real request is sent**.
+
+If not → the browser blocks it.
+
+❗ The server might respond, but JavaScript never sees it.
+
+## Why CORS Errors Feel Confusing
+
+Because the request **did reach the server**.
+
+But the browser said:
+
+> “I’m not letting your JavaScript access this.”
+
+You have likely seen this infamous error in your console:
+
+```txt
+Access to fetch at '[https://api.example.com](https://api.example.com)' from origin 'http://localhost:3000'
+has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+```
+
+CORS is a **browser security feature**, not a backend bug.
+
+## The Language of Outcomes: HTTP Status Codes
+
+Now that we know how the browser asks for permission, how does the server say "yes" or "no"?
+
+It uses a specific numerical language. Imagine reading server responses without status codes.
+
+You’d have to guess:
+
+* Was it successful?
+* Did authentication fail?
+* Was the server down?
+
+Status codes eliminate the guessing game.
+They provide a **standard language** that every client and server understands.
+
+## Status Code Categories
+
+* **1xx** → Informational
+* **2xx** → Success
+* **3xx** → Redirection
+* **4xx** → Client errors
+* **5xx** → Server errors
+
+## The Ones You’ll Use Daily
+
+### ✅ Success (2xx)
+
+* **200** → Request succeeded
+* **201** → Resource created
+* **204** → Success, no content
+
+### 🔁 Redirects (3xx)
+
+* **301** → Permanent redirect
+* **302** → Temporary redirect
+* **304** → Not modified (use cache)
+
+### ❌ Client Errors (4xx)
+
+* **400** → Bad request (invalid data)
+* **401** → Unauthorized (auth missing/expired)
+* **403** → Forbidden (no permission)
+
+This is where backend engineers spend most of their debugging time.
+
+## Why All This Matters
+
+Understanding HTTP isn’t about memorizing headers.
+
+It’s about understanding:
+
+* Why browsers behave the way they do
+* Why requests fail silently
+* Why status codes matter
+* Why statelessness scales
+
+Frameworks change.
+Languages change.
+
+**These principles don't.**
+
+## Final Thought
+
+Before writing code, understand **what is happening**.
+
+Before optimizing performance, understand **why something works**.
+
+Backend engineering isn't magic —
+it's **clear rules, well-understood contracts, and predictable behavior**.
+
+And HTTP is where it all begins.

@@ -1,0 +1,74 @@
+---
+title: "Neon Loop"
+description: "A neon-themed e-commerce platform featuring secure authentication, protected pricing logic, seamless payments, and refined UI interactions."
+slug: "neon-loop"
+imageUrl: "/Neon.png"
+tags: ["Next.js", "Express", "MongoDB", "Razorpay", "motion/react"]
+timeline: "3 months"
+role: "Full Stack"
+team: "Solo"
+status: "Completed"
+liveLink: "https://neon-loop-frontend-66oi.vercel.app/"
+githubLink: "https://github.com/saifalikhan9/neon-loop-backend"
+---
+
+# Neon Loop
+
+## Overview
+
+Neon Loop is a full-stack, neon-themed e-commerce platform built with a strong focus on real-world backend security, smooth purchasing workflows, and visually polished frontend interactions. The platform enables users to browse products, authenticate securely, and complete purchases through a seamless checkout experience.
+
+The project was built to simulate a production-grade selling platform rather than a simple demo application.
+
+## Problem Statement
+
+Many small e-commerce projects rely heavily on frontend logic, making them vulnerable to data manipulation and insecure workflows. Neon Loop was designed to solve this by enforcing all critical business rules at the backend level while still delivering a visually engaging user experience.
+
+## User Experience Flow
+
+1. Users browse products with a smooth, animated interface  
+2. Authentication maintains persistent sessions without repeated logins  
+3. Products are added to the cart with real-time UI feedback  
+4. Checkout initiates a secure payment flow  
+5. Orders are validated and finalized on the server  
+
+Each step prioritizes clarity, security, and responsiveness.
+
+## Key Features
+
+- Persistent authentication using access and refresh tokens  
+- Role-based access control for protected operations  
+- Backend-enforced pricing and product validation  
+- Secure online payments with Razorpay integration  
+- Neon-inspired UI with subtle micro-interactions  
+
+## Technical Stack
+
+- Next.js and React for frontend rendering  
+- Express.js and TypeScript for backend APIs  
+- MongoDB for structured data storage  
+- JWT-based authentication for session management  
+- Razorpay for payment processing  
+- motion/react for smooth and purposeful UI animations  
+
+## Architecture & Logic
+
+All critical business rules, including pricing validation and order verification, are enforced at the backend level to prevent client-side manipulation. Authentication logic separates short-lived access tokens from long-lived refresh tokens to ensure both security and user convenience.
+
+Frontend animations are designed as micro-interactions to enhance usability rather than distract from the purchasing flow.
+
+## Challenges & Solutions
+
+One key challenge was preventing pricing tampering from the client side. This was solved by validating all pricing data against the database during checkout.
+
+Another challenge was maintaining performance while using animations. Motion effects were carefully scoped to micro-interactions to avoid unnecessary re-renders or layout shifts.
+
+## Learnings
+
+- Backend-first validation is critical for real-world commerce systems  
+- Authentication flows should balance security and user experience  
+- Micro-interactions can significantly improve perceived quality  
+
+## Outcome
+
+Neon Loop demonstrates full-stack development skills with a strong emphasis on backend security, payment workflows, and refined frontend experience. The project reflects production-level thinking and attention to both technical and user-centric details.
