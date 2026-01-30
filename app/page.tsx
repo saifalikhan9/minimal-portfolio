@@ -131,13 +131,6 @@ export default async function Home() {
             source={reference}
           />
         )}
-
-        <div className="mx-auto my-auto w-fit h-20 bg-secondary rounded-2xl">
-          <div className="flex items-center justify-center gap-2">
-            <IconEyeFilled /> <span>Total Visitors Count </span>
-          </div>
-
-        </div>
       </Container>
     </div>
   );

@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-
-
 import { Providers } from "@/src/utils/Providers";
 import { Navbar } from "@/src/components/common/navbar";
 import { Footer } from "@/src/components/common/footer";
+import UmamiAnalytics from "@/src/components/analytics/UmamiAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,9 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script defer src="https://cloud.umami.is/script.js" data-website-id="3bc705b1-4eaf-464b-9011-8d0133c93541"></script>
-      </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background [--pattern-fg:var(--color-gray-950)]/10 selection:bg-black selection:text-white dark:[--pattern-fg:var(--color-gray-100)]/10 dark:selection:bg-white dark:selection:text-black`}
       >
@@ -40,6 +36,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
+          <UmamiAnalytics />
         </Providers>
       </body>
     </html>
