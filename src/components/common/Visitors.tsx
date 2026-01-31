@@ -31,12 +31,12 @@ export async function Visitors() {
                     <IconEye className="stroke-1 size-4" />
                 </div>
 
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-secondary">
                     {count > 0 ? (
                         <>
                             You are the{" "}
-                            <span className="font-semibold text-gray-900">
-                                {count.toLocaleString()}th
+                            <span className="font-semibold text-forground">
+                                {count.toLocaleString()} <sup>th</sup>
                             </span>{" "}
                             visitor
                         </>
