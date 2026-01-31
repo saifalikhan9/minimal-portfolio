@@ -1,8 +1,30 @@
 import { Container } from "@/src/components/ui/Container";
 import { Heading } from "@/src/components/ui/Heading";
+import { getPageMetadata } from "@/src/config/Meta";
 import { getAllBlogs } from "@/src/utils/getSingleBlog";
 import { truncate } from "@/src/utils/utils";
+import { Metadata } from "next";
+import { Robots } from "next/dist/lib/metadata/types/metadata-types";
 import Link from "next/link";
+
+
+export const generateMetadata = (): Metadata => {
+  const metadata = getPageMetadata('/blog');
+  return {
+    ...metadata,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      } as Robots['googleBot'],
+    },
+  };
+};
 
 export default async function BlogPost() {
   const allBlogs = await getAllBlogs();
