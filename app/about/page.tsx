@@ -9,6 +9,7 @@ import NextJs from "@/src/components/ui/icons/NextJs";
 import TailwindCss from "@/src/components/ui/icons/TailwindCss";
 import { Tooltip } from "@/src/components/ui/tool-tip";
 import { Timeline } from "@/src/components/ui/Timeline";
+import { mySkills } from "@/src/config/About";
 
 
 const skillIcons = [
@@ -129,8 +130,8 @@ export default function About() {
               <p className="text-secondary mt-4">I'm a Full Stack web developer and Open Source Contributor, I love building products to solve real-world problems. I'm specialized in building MVP's.</p>
               <p className="text-secondary mt-8 font-bold">Skills</p>
               <div className="flex flex-wrap gap-2">
-                {skillIcons.map(({ icon, name }, i) => (
-                  <Tooltip key={i} content={name}>{icon}</Tooltip>
+                {mySkills.map((skills, i) => (
+                  <Tooltip key={skills.key} content={skills.key!!}>{skills}</Tooltip>
                 ))}
               </div>
             </div>

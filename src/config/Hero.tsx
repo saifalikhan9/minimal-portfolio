@@ -24,7 +24,7 @@
  * That's it! Your portfolio will automatically update with your information.
  */
 
-import { IconBrandFramerMotion } from "@tabler/icons-react";
+
 import NextJs from "../components/ui/icons/NextJs";
 import ReactIcon from "../components/ui/icons/ReactIcon";
 import TypeScript from "../components/ui/icons/TypeScript";
@@ -75,7 +75,7 @@ export const heroConfig = {
     },
     {
       name: 'Motion',
-      href: 'https://bun.sh/',
+      href: 'https://motion.dev/',
       component: 'Motion',
     },
     {
@@ -88,46 +88,8 @@ export const heroConfig = {
   // Description Configuration
   description: {
     template:
-      'I build interactive web apps using {skills:0}, {skills:1}, {skills:2}, {skills:3} and {skills:4}. With a focus on <b>UI</b> design. Enthusiastic about <b>Three.js</b>, driven by a keen eye for design.',
+      'I build interactive web apps using {skills:0}, {skills:1}, {skills:2}, and {skills:4}. With a focus on UI design. Enthusiastic about {skills:3}, driven by a keen eye for design.',
   },
 
-  // Buttons Configuration
-  buttons: [
-    {
-      variant: 'outline',
-      text: 'Resume / CV',
-      href: '/resume',
-      icon: 'CV',
-    },
-    {
-      variant: 'default',
-      text: 'Get in touch',
-      href: '/contact',
-      icon: 'Chat',
-    },
-  ],
-};
 
-// Social Links Configuration
-// export const socialLinks = [
-//   {
-//     name: 'X',
-//     href: 'https://x.com/ramxcodes',
-//     icon: <X />,
-//   },
-//   {
-//     name: 'LinkedIn',
-//     href: 'https://www.linkedin.com/in/ramxcodes/',
-//     icon: <LinkedIn />,
-//   },
-//   {
-//     name: 'Github',
-//     href: 'https://github.com/ramxcodes',
-//     icon: <Github />,
-//   },
-//   {
-//     name: 'Email',
-//     href: 'mailto:ramxcodes@gmail.com',
-//     icon: <Mail />,
-//   },
-// ];
+}

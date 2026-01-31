@@ -1,22 +1,16 @@
 import Image from 'next/image'
-import React from 'react'
 import { Heading } from '../ui/Heading'
 import { Link } from 'next-view-transitions'
 import { Button } from '../ui/Button'
 import { IconFileText, IconSend } from '@tabler/icons-react'
-import Motion from '../ui/icons/Motion'
-import PostgreSQL from '../ui/icons/PostgreSQL'
-import ReactIcon from '../ui/icons/ReactIcon'
-import NextJs from '../ui/icons/NextJs'
-import TypeScript from '../ui/icons/TypeScript'
-import { cn } from '@/src/lib/utils'
+
 import { heroConfig, skillComponents } from '@/src/config/Hero'
 import { parseTemplate } from '@/src/lib/hero'
 import Skill from '../common/Skill'
 
 export const Hero = () => {
 
-    const { name, title, avatar, skills, description, buttons } = heroConfig;
+    const { name, title, avatar, skills, description } = heroConfig;
 
     const renderDescription = () => {
         const parts = parseTemplate(description.template, skills);
@@ -97,67 +91,5 @@ export const Hero = () => {
 }
 
 
-const ProfileDes = () => {
-    return (
-        <div className="mt-4 flex flex-wrap items-center gap-x-1.5 gap-y-2  px-4 md:px-10 text-base whitespace-pre-wrap text-neutral-500 md:text-lg">
-            <span className="whitespace-pre-wrap">
-                I build interactive web apps using
-            </span>
-            <IconsText
-
-                iconSvg={<TypeScript />}
-                label="TypeScript"
-            />
-
-            <span className="whitespace-pre-wrap">, </span>
-            <IconsText label="React" iconSvg={<ReactIcon />} />
-            <span className="whitespace-pre-wrap">, </span>
-            <IconsText label="Nextjs" iconSvg={<NextJs />} />
-            <span className="whitespace-pre-wrap">, </span>
-            <IconsText label="React" iconSvg={<ReactIcon />} />
-            <span className="whitespace-pre-wrap"> and </span>
-            <IconsText
-
-                label="PoestgreSQL"
-                iconSvg={<PostgreSQL />}
-            />
-            <span className="whitespace-pre-wrap">. With a focus on </span>
-            <b className="text-forground whitespace-pre-wrap">UI</b>
-            <span className="whitespace-pre-wrap">design. Enthusiastic about</span>
-            <IconsText
-                iconClassName="size-5"
-                label="Motion"
-                iconSvg={<Motion />}
-
-            />
-            <span className="whitespace-pre-wrap">
-                , driven by a keen eye for design.
-            </span>
-        </div>
-    );
-};
 
 
-type IconsTextProps = {
-    className?: string;
-    iconClassName?: string;
-    iconSvg: React.ReactNode;
-    label: string;
-};
-
-const IconsText: React.FC<IconsTextProps> = ({
-    className = "",
-    iconSvg,
-    iconClassName,
-    label,
-}) => (
-    <span
-
-
-        className={`inline-flex items-center self-end rounded-md border border-dashed border-black/20 bg-black/5 px-2 py-1 text-sm text-black shadow-[1px_-1px_12px_var(--color-neutral-300)_inset] dark:border-white/30 dark:bg-white/15 dark:text-white dark:shadow-[1px_1px_10px_var(--color-neutral-700)_inset] ${className}`}
-
-    >
-        <div className={cn("size-4 shrink-0", iconClassName)}>{iconSvg}</div>
-        <p className="ml-1 text-sm font-bold">{label}</p>
-    </span>
-);  

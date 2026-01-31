@@ -1,6 +1,7 @@
-import { IconBrandFramer } from "@tabler/icons-react";
+
 import JavaScript from "../components/ui/icons/JavaScript";
 import { MongoDB } from "../components/ui/icons/MongoDB";
+import Motion from "../components/ui/icons/Motion";
 import NextJs from "../components/ui/icons/NextJs";
 import { Nodejs } from "../components/ui/icons/Nodejs";
 import PostgreSQL from "../components/ui/icons/PostgreSQL";
@@ -11,7 +12,7 @@ import TypeScript from "../components/ui/icons/TypeScript";
 
 export const mySkills = [
     <ReactIcon key="react" />,
-    <IconBrandFramer key="motion" />,
+    <Motion key="motion" />,
     <JavaScript key="javascript" />,
     <TypeScript key="typescript" />,
     <MongoDB key="mongodb" />,
