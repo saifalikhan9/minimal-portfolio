@@ -51,7 +51,7 @@ export const GithubLanding = () => {
         const response = await fetch(
           `${githubConfig.apiUrl}/${githubConfig.username}.json`,
         );
-        console.log(response, "response");
+    
 
         const data: { contributions?: unknown[] } = await response.json();
 
@@ -114,7 +114,7 @@ export const GithubLanding = () => {
     fetchData();
   }, []);
 
-  console.log(contributions,)
+ 
   return (
     <>
       <Container className="p-3 lg:px-8">
