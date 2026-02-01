@@ -41,7 +41,13 @@ export async function Visitors() {
                             visitor
                         </>
                     ) : (
-                        "Loading visitor count..."
+                        <>
+                            You are the{" "}
+                            <span className="font-semibold text-forground">
+                                8 <sup>th</sup>
+                            </span>{" "}
+                            visitor
+                        </>
                     )}
                 </p>
             </div>

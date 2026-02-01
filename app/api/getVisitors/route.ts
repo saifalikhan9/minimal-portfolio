@@ -16,7 +16,7 @@ export async function GET() {
   };
   try {
     const res = await umamiClient.getWebsiteStats(
-      process.env.UMAMI_WEBSITE_ID||"",
+      process.env.NEXT_PUBLIC_UMAMI_ID||"",
       data
     );
     // console.log(res);
