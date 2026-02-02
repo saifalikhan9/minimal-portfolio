@@ -23,7 +23,7 @@ export const Tooltip = ({
 
   return (
     <span
-      className="relative z-20  inline-flex size-6 items-center justify-center transition-all duration-300 ease-in-out hover:scale-120"
+      className="relative z-20  inline-flex size-5 items-center  "
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
     >
@@ -31,7 +31,7 @@ export const Tooltip = ({
 
       {visible && (
         <span
-          className={`bg-forground text-primary absolute z-50 rounded-md px-2 py-1 text-[0.6rem] whitespace-nowrap shadow-md ${positionClasses[position]}`}
+          className={`bg-forground   text-primary absolute z-50 rounded-md px-2 py-1 text-[0.6rem] whitespace-nowrap shadow-md ${positionClasses[position]}`}
         >
           {content}
         </span>

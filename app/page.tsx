@@ -4,6 +4,8 @@ import { GithubLanding } from "@/src/components/Landings/GithubLanding";
 import Projects from "@/src/components/Landings/Projects";
 import { Quote } from "@/src/components/ui/Quote";
 import { Hero } from "@/src/components/Landings/Hero";
+import { Visitors } from "@/src/components/common/Visitors";
+import { getSiteSettings } from "@/src/utils/getSiteSettings";
 
 
 
@@ -42,6 +44,7 @@ function getFallbackQuote() {
 }
 
 export default async function Home() {
+  const { resumeUrl } = await getSiteSettings();
 
 
   let quote = "";
@@ -49,7 +52,7 @@ export default async function Home() {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/getQuote`,
+      `${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/getQuotes`,
       { cache: "no-store" },
     );
     if (res.ok) {
@@ -74,18 +77,21 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen items-start justify-start">
       <Container className="relative min-h-screen pt-24 pb-12">
-        <Hero />
+        <Hero resumeUrl={resumeUrl} />
         <Projects />
         <GithubLanding />
         <BlogsLanding />
         {quote && reference && (
           <Quote
-            className="m-2 mt-10 md:mx-auto lg:max-w-200"
+            className="m-2 my-20 md:mx-auto lg:max-w-200"
             text={quote}
             source={reference}
           />
         )}
-        
+        <div className="mt-20">
+
+          <Visitors />
+        </div>
       </Container>
     </div>
   );

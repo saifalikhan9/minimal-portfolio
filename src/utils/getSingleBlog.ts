@@ -1,47 +1,57 @@
-import fs from "fs";
-import { compileMDX } from "next-mdx-remote/rsc";
-import path from "path";
 import type { BlogFrontmatter, BlogData, BlogMetadata } from "@/src/types/Blogs";
+import { sanityClient } from "../lib/sanity-client";
 
-export const getSingleBlog = async (
-  fileName: string,
+export const getAllSBlogs = async (): Promise<Array<BlogMetadata>> => {
+  const query = `
+    *[_type == "post"] | order(publishedAt desc) {
+      title,
+      slug,
+      description,
+      publishedAt,
+      author
+    }
+  `;
+
+  const posts = await sanityClient.fetch(query);
+
+  return posts.map((post: any) => ({
+    slug: post.slug.current,
+    frontmatter: {
+      title: post.title,
+      description: post.description,
+      date: post.publishedAt,
+      author: post.author,
+    },
+  }));
+};
+
+
+
+export const getSingleSanityBlog = async (
+  slug: string,
 ): Promise<BlogData | null> => {
-  const filePath = path.join(process.cwd(), "src/data/blogs", `${fileName}.mdx`);
-  if (!fs.existsSync(filePath)) {
-    return null;
-  }
+  const query = `
+    *[_type == "post" && slug.current == $slug][0] {
+      title,
+      description,
+      publishedAt,
+      author,
+      content
+    }
+  `;
 
-  const singleBlog = fs.readFileSync(filePath, "utf-8");
-  if (singleBlog) {
-    const { content, frontmatter } = await compileMDX<BlogFrontmatter>({
-      source: singleBlog,
-      options: { parseFrontmatter: true },
-    });
-    return {
-      content,
-      frontmatter,
-    };
-  }
+  const post = await sanityClient.fetch(query, { slug });
 
-  return null;
+  if (!post) return null;
+
+  return {
+    frontmatter: {
+      title: post.title,
+      description: post.description,
+      date: post.publishedAt,
+      author: post.author,
+    },
+    content: post.content, // markdown string
+  };
 };
 
-export const getAllBlogs = async (): Promise<Array<BlogMetadata>> => {
-  const files = fs.readdirSync(path.join(process.cwd(), "src/data/blogs"));
-  const blogs = await Promise.all(
-    files.map(async (file) => {
-      const filePath = path.join(process.cwd(), "src/data/blogs", file);
-      const fileContent = fs.readFileSync(filePath, "utf-8");
-      const { frontmatter } = await compileMDX<BlogFrontmatter>({
-        source: fileContent,
-        options: { parseFrontmatter: true },
-      });
-      const slug = file.replace(/\.mdx$/, "");
-      return {
-        slug,
-        frontmatter,
-      };
-    }),
-  );
-  return blogs;
-};

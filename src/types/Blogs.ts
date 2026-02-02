@@ -7,7 +7,7 @@ export type BlogFrontmatter = {
 };
 
 export type BlogData = {
-  content: React.ReactElement;
+  content: string;
   frontmatter: BlogFrontmatter;
 };
 

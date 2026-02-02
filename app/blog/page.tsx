@@ -1,7 +1,7 @@
 import { Container } from "@/src/components/ui/Container";
 import { Heading } from "@/src/components/ui/Heading";
 import { getPageMetadata } from "@/src/config/Meta";
-import { getAllBlogs } from "@/src/utils/getSingleBlog";
+import { getAllSBlogs } from "@/src/utils/getSingleBlog";
 import { truncate } from "@/src/utils/utils";
 import { Metadata } from "next";
 import { Robots } from "next/dist/lib/metadata/types/metadata-types";
@@ -27,14 +27,14 @@ export const generateMetadata = (): Metadata => {
 };
 
 export default async function BlogPost() {
-  const allBlogs = await getAllBlogs();
+  const Sblogs = await getAllSBlogs();
 
   return (
 
     <Container className="pt-20 min-h-screen">
       <Heading>All Blogs </Heading>
       <div className="my-4 ml-4 flex flex-col gap-4 md:px-10">
-        {allBlogs
+        {Sblogs
           .sort(
             (a, b) =>
               new Date(b.frontmatter.date).getTime() -

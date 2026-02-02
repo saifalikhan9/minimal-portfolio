@@ -8,9 +8,13 @@ import { heroConfig, skillComponents } from '@/src/config/Hero'
 import { parseTemplate } from '@/src/lib/hero'
 import Skill from '../common/Skill'
 
-export const Hero = () => {
+const FALLBACK_RESUME_URL =
+  "https://drive.google.com/file/d/1yditvS4vokyLE_DXAg-Fq_Zj8uL0l1-V/view?usp=drive_link";
+
+export const Hero = ({ resumeUrl }: { resumeUrl?: string }) => {
 
     const { name, title, avatar, skills, description } = heroConfig;
+    const resumeHref = resumeUrl || FALLBACK_RESUME_URL;
 
     const renderDescription = () => {
         const parts = parseTemplate(description.template, skills);
@@ -24,8 +28,8 @@ export const Hero = () => {
               return null;
             }
             return (
-              <Skill key={part.key} name={part.skill.name} href={part.skill.href}>
-                <SkillComponent />
+              <Skill  key={part.key} name={part.skill.name} href={part.skill.href}>
+                <SkillComponent className='' />
               </Skill>
             );
           } else if (part.type === 'bold' && 'text' in part) {
@@ -58,15 +62,13 @@ export const Hero = () => {
             <Heading className="tracking-wide">
             Hi, I&apos;m {name} — <span className="text-secondary">{title}</span>
             </Heading>
-            <div className="mt-4 flex flex-wrap items-center gap-x-1.5 gap-y-2 px-4 md:px-10 text-base whitespace-pre-wrap text-neutral-500 md:text-lg">
-          {renderDescription()}
-        </div>
+            <div className="mt-4 px-4 md:px-10 text-base whitespace-pre-wrap  leading-loose text-secondary md:text-lg ">
+              {renderDescription()}
+            </div>
 
             <div className="mx-4 md:mx-10 my-4 inline-flex items-center gap-5">
                 <Link
-                    href={
-                        "https://drive.google.com/file/d/1yditvS4vokyLE_DXAg-Fq_Zj8uL0l1-V/view?usp=drive_link"
-                    }
+                    href={resumeHref}
                 >
                     <Button variant="secondary" className="gap-1" asChild>
                         <span>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/src/utils/Providers";
@@ -7,7 +7,7 @@ import { Footer } from "@/src/components/common/footer";
 import UmamiAnalytics from "@/src/components/analytics/UmamiAnalytics";
 import { getPageMetadata } from "@/src/config/Meta";
 import { ViewTransitions } from 'next-view-transitions';
-import { Visitors } from "@/src/components/common/Visitors";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,9 +37,7 @@ export default function RootLayout({
           <Providers>
             <Navbar />
             {children}
-            <Visitors />
             <Footer />
-
             <UmamiAnalytics />
           </Providers>
         </body>

@@ -59,6 +59,11 @@ export const heroConfig = {
   // Skills Configuration
   skills: [
     {
+      name: 'Javascript',
+      href: 'https://www.typescriptlang.org/',
+      component: 'JavaScript',
+    },
+    {
       name: 'Typescript',
       href: 'https://www.typescriptlang.org/',
       component: 'TypeScript',
@@ -73,22 +78,23 @@ export const heroConfig = {
       href: 'https://nextjs.org/',
       component: 'NextJs',
     },
-    {
-      name: 'Motion',
-      href: 'https://motion.dev/',
-      component: 'Motion',
-    },
+
     {
       name: 'PostgreSQL',
       href: 'https://www.postgresql.org/',
       component: 'PostgreSQL',
     },
+    {
+      name: 'Motion',
+      href: 'https://motion.dev/',
+      component: 'Motion',
+    }
   ],
 
   // Description Configuration
   description: {
     template:
-      'I build interactive web apps using {skills:0}, {skills:1}, {skills:2}, and {skills:4}. With a focus on UI design. Enthusiastic about {skills:3}, driven by a keen eye for design.',
+      'I design and build interactive web apps using {skills:0} , {skills:1} , {skills:2} , {skills:3} , and {skills:4} , with a strong focus on UI design, smooth animations, and thoughtful micro-interactions using {skills:5} .',
   },
 
 

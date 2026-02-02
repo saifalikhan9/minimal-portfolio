@@ -1,9 +1,10 @@
 import React from "react";
-import { getSingleBlog } from "@/src/utils/getSingleBlog";
+import { getSingleSanityBlog } from "@/src/utils/getSingleBlog";
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { Container } from "@/src/components/ui/Container";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown"
 
 export async function generateMetadata({
   params,
@@ -11,7 +12,7 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const { slug } = await params;
-  const data = await getSingleBlog(slug);
+  const data = await getSingleSanityBlog(slug);
   if (!data) {
     return {};
   }
@@ -32,7 +33,7 @@ export async function generateMetadata({
 export default async function Blogs({ params }: { params: { slug: string } }) {
   const { slug } = await params;
 
-  const blogData = await getSingleBlog(slug);
+  const blogData = await getSingleSanityBlog(slug);
   if (!blogData) {
     return redirect("/blog");
   }
@@ -41,7 +42,7 @@ export default async function Blogs({ params }: { params: { slug: string } }) {
 
   return (
     <Container className="min-h-screen pt-24 pb-16">
-      <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 md:px-0">
+      <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 md:px-0 ">
         <Link
           href="/blog"
           className="text-xs text-muted-forground hover:text-forground w-fit rounded-full border border-border/40 bg-background/40 px-3 py-1 transition-all duration-200 hover:bg-secondary/10"
@@ -71,10 +72,11 @@ export default async function Blogs({ params }: { params: { slug: string } }) {
             {frontmatter.description}
           </p>
         </header>
+        <article className="prose max-w-none dark:prose-invert prose-sm md:prose-base  w-full">
 
-        <article className="prose prose-sm md:prose-base prose-h1:text-2xl md:prose-h1:text-3xl prose-headings:text-forground prose-a:text-forground prose-a:no-underline prose-a:border-b prose-a:border-border/40 prose-a:hover:border-forground dark:prose-invert max-w-none text-muted-forground">
-          {content}
+          <ReactMarkdown >{content}</ReactMarkdown>
         </article>
+
       </div>
     </Container>
   );

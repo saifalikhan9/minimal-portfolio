@@ -61,8 +61,8 @@ export const ProjectCard = ({
           link={projects.linkLink}
         />
 
-        <div className="mx-2 my-4 flex items-center justify-between">
-          <div>
+        <div className="mx-2 my-4  flex items-center justify-between">
+          <div className="inline-flex gap-x-2">
             {projects.technologies.map((tech, techIndex) => (
               <Tooltip
                 key={`${projects.title}-${techIndex}`}
