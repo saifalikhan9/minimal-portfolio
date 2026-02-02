@@ -6,6 +6,7 @@ import { Quote } from "@/src/components/ui/Quote";
 import { Hero } from "@/src/components/Landings/Hero";
 import { Visitors } from "@/src/components/common/Visitors";
 import { getSiteSettings } from "@/src/utils/getSiteSettings";
+import { AnimeQuote, getAnimeQuote } from "@/src/server-functions/getQuote";
 
 
 
@@ -47,31 +48,20 @@ export default async function Home() {
   const { resumeUrl } = await getSiteSettings();
 
 
-  let quote = "";
-  let reference = "";
+  let data: AnimeQuote | null = null
 
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/getQuotes`,
-      { cache: "no-store" },
-    );
-    if (res.ok) {
-      const json = await res.json();
-      quote = json?.data?.quote ?? "";
-      reference = json?.data?.reference ?? "";
+    data = await getAnimeQuote();
+
+    if (!data) {
+      data = getFallbackQuote();
     }
-    // If API returns but no quote, fallback
-    if (!quote || !reference) {
-      const fallback = getFallbackQuote();
-      quote = fallback.quote;
-      reference = fallback.reference;
-    }
+
   } catch (error) {
     console.error("Failed to fetch quote:", error);
     // If fetch fails, fallback to anime quote
-    const fallback = getFallbackQuote();
-    quote = fallback.quote;
-    reference = fallback.reference;
+    data = getFallbackQuote();
+
 
   }
   return (
@@ -81,13 +71,13 @@ export default async function Home() {
         <Projects />
         <GithubLanding />
         <BlogsLanding />
-        {quote && reference && (
+        
           <Quote
             className="m-2 my-20 md:mx-auto lg:max-w-200"
-            text={quote}
-            source={reference}
+            text={data.quote}
+            source={data.reference}
           />
-        )}
+        
         <div className="mt-20">
 
           <Visitors />

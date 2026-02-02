@@ -1,25 +1,6 @@
 import { IconEye } from "@tabler/icons-react";
 import { Container } from "../ui/Container";
-
-async function getVisitorsCount(): Promise<number> {
-    try {
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-        const response = await fetch(`${baseUrl}/api/getVisitors`, {
-            cache: "no-store",
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch visitors: ${response.status}`);
-        }
-
-        const json = await response.json();
-        const data = json?.data;
-        return data.visitors || 0
-    } catch (error) {
-        console.error("Failed to fetch visitors count:", error);
-        return 0;
-    }
-}
+import { getVisitorsCount } from "@/src/server-functions/getVisitors";
 
 export async function Visitors() {
     const count = await getVisitorsCount();
