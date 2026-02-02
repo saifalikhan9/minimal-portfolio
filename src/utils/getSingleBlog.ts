@@ -12,7 +12,13 @@ export const getAllSBlogs = async (): Promise<Array<BlogMetadata>> => {
     }
   `;
 
-  const posts = await sanityClient.fetch(query);
+  let posts: any[] = [];
+  try {
+    posts = await sanityClient.fetch(query);
+  } catch (error) {
+    console.error("Sanity: failed to fetch posts (getAllSBlogs)", error);
+    return [];
+  }
 
   return posts.map((post: any) => ({
     slug: post.slug.current,
@@ -40,7 +46,16 @@ export const getSingleSanityBlog = async (
     }
   `;
 
-  const post = await sanityClient.fetch(query, { slug });
+  let post: any = null;
+  try {
+    post = await sanityClient.fetch(query, { slug });
+  } catch (error) {
+    console.error("Sanity: failed to fetch post (getSingleSanityBlog)", {
+      slug,
+      error,
+    });
+    return null;
+  }
 
   if (!post) return null;
 
