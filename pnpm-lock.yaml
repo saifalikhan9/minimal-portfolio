@@ -17,6 +17,9 @@ importers:
       '@mdx-js/react':
         specifier: ^3.1.1
         version: 3.1.1(@types/react@19.2.10)(react@19.2.3)
+      '@mistralai/mistralai':
+        specifier: ^1.14.0
+        version: 1.14.0
       '@next/mdx':
         specifier: ^16.1.6
         version: 16.1.6(@mdx-js/loader@3.1.1)(@mdx-js/react@3.1.1(@types/react@19.2.10)(react@19.2.3))
@@ -1605,6 +1608,9 @@ packages:
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
+
+  '@mistralai/mistralai@1.14.0':
+    resolution: {integrity: sha512-6zaj2f2LCd37cRpBvCgctkDbXtYBlAC85p+u4uU/726zjtsI+sdVH34qRzkm9iE3tRb8BoaiI0/P7TD+uMvLLQ==}
 
   '@mux/mux-data-google-ima@0.2.8':
     resolution: {integrity: sha512-0ZEkHdcZ6bS8QtcjFcoJeZxJTpX7qRIledf4q1trMWPznugvtajCjCM2kieK/pzkZj1JM6liDRFs1PJSfVUs2A==}
@@ -7019,6 +7025,11 @@ packages:
     resolution: {integrity: sha512-zK7YHHz4ZXpW89AHXUPbQVGKI7uvkd3hzusTdotCg1UxyaVtg0zFJSTfW/Dq5f7OBBVnq6cZIaC8Ti4hb6dtCA==}
     engines: {node: '>= 14'}
 
+  zod-to-json-schema@3.25.1:
+    resolution: {integrity: sha512-pM/SU9d3YAggzi6MtR4h7ruuQlqKtad8e9S0fmxcMi+ueAK5Korys/aWcV9LIIHTVbj01NdzxcnXSN+O74ZIVA==}
+    peerDependencies:
+      zod: ^3.25 || ^4
+
   zod-validation-error@4.0.2:
     resolution: {integrity: sha512-Q6/nZLe6jxuU80qb/4uJ4t5v2VEZ44lzQjPDhYJNztRQ4wyWc6VF3D3Kb/fAuPetZQnhS3hnajCf9CsWesghLQ==}
     engines: {node: '>=18.0.0'}
@@ -8666,6 +8677,15 @@ snapshots:
       '@types/mdx': 2.0.13
       '@types/react': 19.2.10
       react: 19.2.3
+
+  '@mistralai/mistralai@1.14.0':
+    dependencies:
+      ws: 8.19.0
+      zod: 4.3.6
+      zod-to-json-schema: 3.25.1(zod@4.3.6)
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
 
   '@mux/mux-data-google-ima@0.2.8':
     dependencies:
@@ -15086,6 +15106,10 @@ snapshots:
       archiver-utils: 5.0.2
       compress-commons: 6.0.2
       readable-stream: 4.7.0
+
+  zod-to-json-schema@3.25.1(zod@4.3.6):
+    dependencies:
+      zod: 4.3.6
 
   zod-validation-error@4.0.2(zod@4.3.6):
     dependencies:

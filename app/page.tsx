@@ -51,7 +51,8 @@ export default async function Home() {
   let data: AnimeQuote | null = null
 
   try {
-    data = await getAnimeQuote();
+    data = await getAnimeQuote(); 
+
 
     if (!data) {
       data = getFallbackQuote();

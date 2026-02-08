@@ -27,14 +27,14 @@ export const generateMetadata = (): Metadata => {
 };
 
 export default async function BlogPost() {
-  const Sblogs = await getAllSBlogs();
+  const allblogs = await getAllSBlogs();
 
   return (
 
     <Container className="pt-20 min-h-screen">
       <Heading>All Blogs </Heading>
       <div className="my-4 ml-4 flex flex-col gap-4 md:px-10">
-        {Sblogs
+        {allblogs
           .sort(
             (a, b) =>
               new Date(b.frontmatter.date).getTime() -
@@ -47,7 +47,7 @@ export default async function BlogPost() {
               className="hover:bg-secondary/10 rounded transition-all duration-200 ease-in-out hover:scale-101 md:p-2"
             >
               <div className="items-center justify-between md:flex">
-                <h2 className="text-forground mb-2 w-full text-base font-bold tracking-tight">
+                <h2 className="text-forground mb-2 w-full max-w-xl text-base font-bold tracking-tight">
                   {blog.frontmatter.title}
                 </h2>
                 <p className="text-forground mb-2 w-20 text-xs">

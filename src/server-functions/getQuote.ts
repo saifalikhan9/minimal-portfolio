@@ -1,14 +1,16 @@
 "use server"
 
-import genAi from "@/src/utils/getGemini";
+import { client } from "../utils/get-AI-Client";
+
+
 export type AnimeQuote = { quote: string; reference: string };
 
-export async function getAnimeQuote(): Promise<AnimeQuote |null> {
+export async function getAnimeQuote() {
     const prompt = `
     You are a JSON-only response generator.
     
     Rules:
-    - Generate ONE short anime quote (max 30 words)
+    - Generate ONE random short anime quote (max 30 words)
     - Quote must be from a real anime and the popular ones
     - Quotes must be motivational and related to that
     - No explanations, emojis, or extra text
@@ -20,16 +22,22 @@ export async function getAnimeQuote(): Promise<AnimeQuote |null> {
       "reference": "Anime Title – Character Name"
     }
     `;
-
-  const result = await genAi.models.generateContent({
-    model: "gemini-2.5-flash-lite",
-    contents: prompt,
+    const result = await client.chat.complete({
+      model: "mistral-large-latest",
+      temperature: 0.9, 
+      topP:0.95,
+      messages: [{role: 'user', content: prompt}]
   });
-  if (!result?.text) {
+ 
+  if (!result) {
     throw new Error("AI response is empty");
   }
+  const message = result.choices[0].message.content 
+  if(!message){
+    throw new Error("AI response message is empty");
+  }
 
-  const parsed = parseJson(result.text);
+  const parsed = parseJson(message as string);
 
   if (!parsed) {
    console.log("not able to parse")
@@ -37,7 +45,8 @@ export async function getAnimeQuote(): Promise<AnimeQuote |null> {
   }
 
 
-  return parsed;
+return parsed
+
 }
 
 

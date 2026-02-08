@@ -11,7 +11,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const { slug } = await  params;
+  const { slug } = await params;
   const data = await getSingleSanityBlog(slug);
   if (!data) {
     return {};

@@ -22,7 +22,7 @@ export const projects: Project[] = [
     description:
       "Built Resume Roast, a fun AI-based resume review platform that gives blunt, actionable feedback instead of generic suggestions, making resume improvement engaging and memorable.",
       imageLink:
-      "https://saifalikhan99.vercel.app/_next/image?url=%2Fimages%2FresumeRoast.png&w=1920&q=75",
+      "/assets/resume-roast.png",
 
       linkLink: "https://roast-resume-frontend.vercel.app/",
     technologies: [
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     title: "Neon Loop / E-Commerce wesite",
     description:
       "Developed a neon-themed selling platform with a secure backend using JWT authentication, role-based access control, backend-enforced pricing rules, and Razorpay payment integration for seamless transactions, along with a tasteful frontend featuring smooth micro-interactions built using React and the motion/react animation library.",
-    imageLink: "/Neon.png",
+    imageLink: "/assets/Neon.png",
 
     linkLink: "https://neon-loop-frontend-66oi.vercel.app/",
     technologies: [
@@ -61,7 +61,7 @@ export const projects: Project[] = [
     description:
       "Built a Chrome extension that provides AI-powered hints for LeetCode problems without revealing full solutions. The extension extracts problem context directly from the DOM, refines and structures the data, and feeds it to an LLM with strict prompt constraints to generate conceptual guidance, edge-case reminders, and approach-level hints. Designed with responsible AI usage in mind, requiring users to supply their own API key while ensuring no credentials or problem data are stored.",
     imageLink:
-      "https://saifalikhan99.vercel.app/_next/image?url=%2Fimages%2Fextention.jpg&w=1920&q=75",
+      "https://github.com/saifalikhan9/Portfolio/blob/main/public/images/extention.jpg?raw=true",
 
     linkLink: "", // optional: Chrome Web Store or demo link if available
     technologies: [
@@ -80,7 +80,7 @@ export const projects: Project[] = [
     description:
       "Built a custom MCP (Model Context Protocol) server to automate build-in-public progress updates on Twitter while learning Data Structures and Algorithms. The system leverages AI-aware coding context from Visual Studio Code and GitHub Copilot, allowing a single natural-language prompt to generate and publish meaningful daily progress updates. Designed as a developer productivity tool that reduces friction, encourages consistency, and demonstrates real-world AI automation beyond traditional CRUD applications.",
     imageLink:
-      "https://saifalikhan99.vercel.app/_next/image?url=%2Fimages%2Fmcp.jpg&w=1920&q=75",
+      "https://github.com/saifalikhan9/Portfolio/blob/main/public/images/mcp.jpg?raw=true",
 
     linkLink: "",
     technologies: [
