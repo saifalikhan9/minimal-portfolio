@@ -1,13 +1,15 @@
 import BlogsLanding from "@/src/components/Landings/Blogs";
 import { Container } from "@/src/components/ui/Container";
-import { GithubLanding } from "@/src/components/Landings/GithubLanding";
 import Projects from "@/src/components/Landings/Projects";
 import { Quote } from "@/src/components/ui/Quote";
 import { Hero } from "@/src/components/Landings/Hero";
 import { Visitors } from "@/src/components/common/Visitors";
 import { getSiteSettings } from "@/src/utils/getSiteSettings";
 import { AnimeQuote, getAnimeQuote } from "@/src/server-functions/getQuote";
-
+import dynamic from 'next/dynamic';
+import { GithubLanding } from "@/src/components/Landings/GithubLanding";
+import { Suspense } from "react";
+import { getGithubContributions } from "@/src/server-functions/githubContributions";
 
 
 // Helper: Returns a famous motivational anime quote and its reference
@@ -45,43 +47,46 @@ function getFallbackQuote() {
 }
 
 export default async function Home() {
-  const { resumeUrl } = await getSiteSettings();
 
 
-  let data: AnimeQuote | null = null
-
-  try {
-    data = await getAnimeQuote(); 
 
 
-    if (!data) {
-      data = getFallbackQuote();
-    }
+ 
+  const siteSettingsPromise = getSiteSettings();
 
-  } catch (error) {
-    console.error("Failed to fetch quote:", error);
-    // If fetch fails, fallback to anime quote
-    data = getFallbackQuote();
+  const quotePromise = getAnimeQuote().catch(() => null);
 
 
-  }
+  const githubPromise = getGithubContributions();
+
+  const [siteSettings, quoteData, contributions] =
+    await Promise.all([
+      siteSettingsPromise,
+      quotePromise,
+      githubPromise,
+    ]);
+
+  const data = quoteData ?? getFallbackQuote();
+
   return (
     <div className="flex min-h-screen items-start justify-start">
       <Container className="relative min-h-screen pt-24 pb-12">
-        <Hero resumeUrl={resumeUrl} />
+        <Hero resumeUrl={siteSettings.resumeUrl} />
         <Projects />
-        <GithubLanding />
+        <GithubLanding contributions={contributions.contributions} totalContributions={contributions.total} />
         <BlogsLanding />
-        
-          <Quote
-            className="m-2 my-20 md:mx-auto lg:max-w-200"
-            text={data.quote}
-            source={data.reference}
-          />
-        
+
+        <Quote
+          className="m-2 my-20 md:mx-auto lg:max-w-200"
+          text={data.quote}
+          source={data.reference}
+        />
+
         <div className="mt-20">
 
-          <Visitors />
+          <Suspense fallback={<div className="h-10" />}>
+            <Visitors />
+          </Suspense>
         </div>
       </Container>
     </div>

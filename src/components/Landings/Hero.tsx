@@ -3,7 +3,6 @@ import { Heading } from '../ui/Heading'
 import { Link } from 'next-view-transitions'
 import { Button } from '../ui/Button'
 import { IconFileText, IconSend } from '@tabler/icons-react'
-
 import { heroConfig, skillComponents } from '@/src/config/Hero'
 import { parseTemplate } from '@/src/lib/hero'
 import Skill from '../common/Skill'
