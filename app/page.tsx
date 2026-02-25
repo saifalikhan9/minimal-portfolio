@@ -5,16 +5,13 @@ import { Quote } from "@/src/components/ui/Quote";
 import { Hero } from "@/src/components/Landings/Hero";
 import { Visitors } from "@/src/components/common/Visitors";
 import { getSiteSettings } from "@/src/utils/getSiteSettings";
-import { AnimeQuote, getAnimeQuote } from "@/src/server-functions/getQuote";
-import dynamic from 'next/dynamic';
+import {  getAnimeQuote } from "@/src/server-functions/getQuote";
 import { GithubLanding } from "@/src/components/Landings/GithubLanding";
 import { Suspense } from "react";
 import { getGithubContributions } from "@/src/server-functions/githubContributions";
 
-
-// Helper: Returns a famous motivational anime quote and its reference
 function getFallbackQuote() {
-  // Array of the 5 most famous motivational anime quotes (with source)
+
   const quotes = [
     {
       quote:
@@ -47,11 +44,6 @@ function getFallbackQuote() {
 }
 
 export default async function Home() {
-
-
-
-
- 
   const siteSettingsPromise = getSiteSettings();
 
   const quotePromise = getAnimeQuote().catch(() => null);
@@ -73,7 +65,7 @@ export default async function Home() {
       <Container className="relative min-h-screen pt-24 pb-12">
         <Hero resumeUrl={siteSettings.resumeUrl} />
         <Projects />
-        <GithubLanding contributions={contributions.contributions} totalContributions={contributions.total} />
+        <GithubLanding contributions={contributions}  />
         <BlogsLanding />
 
         <Quote

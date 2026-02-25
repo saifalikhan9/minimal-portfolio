@@ -1,6 +1,6 @@
 import { Container } from "@/src/components/ui/Container";
 import { Heading } from "@/src/components/ui/Heading";
-import { SubHeading } from "@/src/components/ui/Subheading";
+
 import Image from "next/image";
 import JavaScript from "@/src/components/ui/icons/JavaScript";
 import TypeScript from "@/src/components/ui/icons/TypeScript";
@@ -12,13 +12,7 @@ import { Timeline } from "@/src/components/ui/Timeline";
 import { mySkills } from "@/src/config/About";
 
 
-const skillIcons = [
-  { icon: <JavaScript key="javascript" />, name: "JavaScript" },
-  { icon: <TypeScript key="typescript" />, name: "TypeScript" },
-  { icon: <ReactIcon key="react" />, name: "React" },
-  { icon: <NextJs key="nextjs" />, name: "Next.js" },
-  { icon: <TailwindCss key="tailwindcss" />, name: "Tailwind CSS" },
-];
+
 
 
 
@@ -130,7 +124,7 @@ export default function About() {
               <p className="text-secondary mt-4">I'm a Full Stack web developer and Open Source Contributor, I love building products to solve real-world problems. I'm specialized in building MVP's.</p>
               <p className="text-secondary mt-8 font-bold">Skills</p>
               <div className="flex flex-wrap gap-2">
-                {mySkills.map((skills, i) => (
+                {mySkills.map((skills) => (
                   <Tooltip key={skills.key} content={skills.key!!}>{skills}</Tooltip>
                 ))}
               </div>

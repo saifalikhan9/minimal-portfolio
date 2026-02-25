@@ -4,14 +4,13 @@ import { Project } from "@/src/types/Projects";
 import { Tooltip } from "../ui/tool-tip";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, easeInOut, motion } from "motion/react";
+import {  easeInOut, motion } from "motion/react";
 import {
   IconArrowNarrowRight,
   IconBrandGithub,
   IconWorld,
 } from "@tabler/icons-react";
 import { truncate } from "@/src/utils/utils";
-import { useState } from "react";
 
 export const ProjectCard = ({
   className,

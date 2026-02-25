@@ -1,9 +1,4 @@
-import {
-  IconBrandNodejs,
-  IconBrandTwitter,
-  IconBrandX,
-  IconGlobe,
-} from "@tabler/icons-react";
+
 import ExpressJs from "../components/ui/icons/ExpressJs";
 import { MongoDB } from "../components/ui/icons/MongoDB";
 import NextJs from "../components/ui/icons/NextJs";
@@ -15,6 +10,7 @@ import Gemini from "../components/ui/icons/Gemini";
 import { Nodejs } from "../components/ui/icons/Nodejs";
 import { Redis } from "../components/ui/icons/Redis";
 import { Vite } from "../components/ui/icons/Vite";
+import { IconBrandX } from "@tabler/icons-react";
 
 export const projects: Project[] = [
   {

@@ -5,55 +5,51 @@ import { githubConfig } from "@/src/config/GithubConfig";
 import { filterLastYear } from "../utils/getYear";
 
 export type ContributionItem = {
-    date: string;
-    count: number;
-    level: 0 | 1 | 2 | 3 | 4;
-  };
-  
-  export type GitHubContributionResponse = {
-    date: string;
-    contributionCount: number;
-    contributionLevel:
+  date: string;
+  count: number;
+  level: 0 | 1 | 2 | 3 | 4;
+};
+
+export type GitHubContributionResponse = {
+  date: string;
+  contributionCount: number;
+  contributionLevel:
     | "NONE"
     | "FIRST_QUARTILE"
     | "SECOND_QUARTILE"
     | "THIRD_QUARTILE"
     | "FOURTH_QUARTILE";
-  };
-  
-  
-  
+};
 
-async function fetchGithub(): Promise<{
-  contributions: ContributionItem[];
-  total: number;
-}> {
+async function fetchGithub(): Promise<ContributionItem[]> {
   const res = await fetch(
     `${githubConfig.apiUrl}/${githubConfig.username}.json`,
-    { next: { revalidate: 3600 } }, // 1h cache
+    { next: { revalidate: 3600 } }
   );
 
   if (!res.ok) {
     console.error("GitHub contributions API failed:", res.status);
-    return { contributions: [], total: 0 };
+    return [];
   }
 
   const data: { contributions?: unknown[] } = await res.json();
 
   if (!data?.contributions || !Array.isArray(data.contributions)) {
-    return { contributions: [], total: 0 };
+    return [];
   }
 
-  const flat = (data.contributions as unknown[]).flat();
+  const flat = data.contributions.flat();
 
-  const levelMap: Record<GitHubContributionResponse["contributionLevel"], ContributionItem["level"]> =
-    {
-      NONE: 0,
-      FIRST_QUARTILE: 1,
-      SECOND_QUARTILE: 2,
-      THIRD_QUARTILE: 3,
-      FOURTH_QUARTILE: 4,
-    };
+  const levelMap: Record<
+    GitHubContributionResponse["contributionLevel"],
+    ContributionItem["level"]
+  > = {
+    NONE: 0,
+    FIRST_QUARTILE: 1,
+    SECOND_QUARTILE: 2,
+    THIRD_QUARTILE: 3,
+    FOURTH_QUARTILE: 4,
+  };
 
   const valid: ContributionItem[] = flat
     .filter((item: unknown): item is GitHubContributionResponse => {
@@ -67,19 +63,11 @@ async function fetchGithub(): Promise<{
     })
     .map((i) => ({
       date: i.date,
-      count: i.contributionCount ?? 0,
-      level:
-        levelMap[
-          i.contributionLevel as GitHubContributionResponse["contributionLevel"]
-        ] ?? 0,
+      count: i.contributionCount,
+      level: levelMap[i.contributionLevel],
     }));
 
-  const total = valid.reduce((sum, item) => sum + item.count, 0);
-
-  return {
-    contributions: filterLastYear(valid),
-    total,
-  };
+  return filterLastYear(valid);
 }
 
 export const getGithubContributions = unstable_cache(
@@ -87,4 +75,3 @@ export const getGithubContributions = unstable_cache(
   ["github-contributions"],
   { revalidate: 3600 }
 );
-

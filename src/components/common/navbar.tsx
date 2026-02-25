@@ -23,7 +23,7 @@ export const Navbar = () => {
   const { scrollY } = useScroll();
   useEffect(() => {
     setMounted(true);
-  });
+  },[]);
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 20) {
       setScrolled(true);

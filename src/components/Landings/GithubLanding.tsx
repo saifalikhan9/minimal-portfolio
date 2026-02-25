@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 
 
-export const GithubLanding = ({ contributions, totalContributions }: { contributions: ContributionItem[], totalContributions: number }) => {
+export const GithubLanding = ({ contributions,  }: { contributions: ContributionItem[] }) => {
 
 
   const { theme } = useTheme();

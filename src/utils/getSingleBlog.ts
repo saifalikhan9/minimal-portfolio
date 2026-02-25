@@ -1,4 +1,4 @@
-import type { BlogFrontmatter, BlogData, BlogMetadata } from "@/src/types/Blogs";
+import type {  BlogData, BlogMetadata } from "@/src/types/Blogs";
 import { sanityClient } from "../lib/sanity-client";
 
 export const getAllSBlogs = async (): Promise<Array<BlogMetadata>> => {
