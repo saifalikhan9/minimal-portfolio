@@ -5,7 +5,7 @@ import { Quote } from "@/src/components/ui/Quote";
 import { Hero } from "@/src/components/Landings/Hero";
 import { Visitors } from "@/src/components/common/Visitors";
 import { getSiteSettings } from "@/src/utils/getSiteSettings";
-import {  getAnimeQuote } from "@/src/server-functions/getQuote";
+import { getAnimeQuote } from "@/src/server-functions/getQuote";
 import { GithubLanding } from "@/src/components/Landings/GithubLanding";
 import { Suspense } from "react";
 import { getGithubContributions } from "@/src/server-functions/githubContributions";
@@ -65,7 +65,7 @@ export default async function Home() {
       <Container className="relative min-h-screen pt-24 pb-12">
         <Hero resumeUrl={siteSettings.resumeUrl} />
         <Projects />
-        <GithubLanding contributions={contributions}  />
+        <GithubLanding contributions={contributions} />
         <BlogsLanding />
 
         <Quote

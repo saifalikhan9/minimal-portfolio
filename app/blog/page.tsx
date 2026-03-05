@@ -1,15 +1,16 @@
+import { BlogCard } from "@/src/components/Blogs/BlogsCard";
 import { Container } from "@/src/components/ui/Container";
 import { Heading } from "@/src/components/ui/Heading";
 import { getPageMetadata } from "@/src/config/Meta";
 import { getAllSBlogs } from "@/src/utils/getSingleBlog";
-import { truncate } from "@/src/utils/utils";
 import { Metadata } from "next";
 import { Robots } from "next/dist/lib/metadata/types/metadata-types";
-import Link from "next/link";
+
+
 
 
 export const generateMetadata = (): Metadata => {
-  const metadata = getPageMetadata('/blog');
+  const metadata = getPageMetadata("/blog");
   return {
     ...metadata,
     robots: {
@@ -18,10 +19,10 @@ export const generateMetadata = (): Metadata => {
       googleBot: {
         index: true,
         follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      } as Robots['googleBot'],
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      } as Robots["googleBot"],
     },
   };
 };
@@ -30,10 +31,9 @@ export default async function BlogPost() {
   const allblogs = await getAllSBlogs();
 
   return (
-
     <Container className="pt-20 min-h-screen">
       <Heading>All Blogs </Heading>
-      <div className="my-4 ml-4 flex flex-col gap-4 md:px-10">
+      <div className="my-4 mx-4 flex flex-col gap-4 md:px-10">
         {allblogs
           .sort(
             (a, b) =>
@@ -41,27 +41,7 @@ export default async function BlogPost() {
               new Date(a.frontmatter.date).getTime(),
           )
           .map((blog, idx) => (
-            <Link
-              href={`/blog/${blog.slug}`}
-              key={idx}
-              className="hover:bg-secondary/10 rounded transition-all duration-200 ease-in-out hover:scale-101 md:p-2"
-            >
-              <div className="items-center justify-between md:flex">
-                <h2 className="text-forground mb-2 w-full max-w-xl text-base font-bold tracking-tight">
-                  {blog.frontmatter.title}
-                </h2>
-                <p className="text-forground mb-2 w-20 text-xs">
-                  {new Date(blog.frontmatter.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </p>
-              </div>
-              <p className="text-secondary max-w-lg text-sm">
-                {truncate(blog.frontmatter.description, 150)}
-              </p>
-            </Link>
+            <BlogCard key={blog.slug ?? idx} frontmatter={blog.frontmatter} slug={blog.slug} />
           ))}
       </div>
     </Container>

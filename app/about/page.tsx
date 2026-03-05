@@ -117,7 +117,7 @@ export default function About() {
         </Heading>
         <div className="mx-6 my-4">
           <div className="mt-8 flex flex-col gap-4 md:flex-row">
-            <Image className="size-40 md:size-55 rounded-lg shadow-[0px_0px_3px_1px_var(--color-secondary)]" src={"https://saifalikhan99.vercel.app/_next/image?url=%2Fimages%2Fdp.jpg&w=640&q=75"} alt="Profile Image" width={500} height={500} />
+            <Image className="size-40 md:size-55 rounded-lg shadow-[0px_0px_3px_1px_var(--color-secondary)]" src="/assets/avatar.jpg" alt="Profile Image" width={500} height={500} />
 
             <div className="mt-4">
               <Heading as="h3" className="text-2xl font-bold md:p-0 p-0 tracking-wide">Saif Ali Khan</Heading>
