@@ -33,7 +33,7 @@ export default async function BlogPost() {
   return (
     <Container className="pt-20 min-h-screen">
       <Heading>All Blogs </Heading>
-      <div className="my-4 mx-4 flex flex-col gap-4 md:px-10">
+      <div className="my-2 mx-4 flex flex-col gap-4 md:px-10">
         {allblogs
           .sort(
             (a, b) =>
