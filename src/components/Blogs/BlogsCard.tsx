@@ -6,7 +6,7 @@ import { Link } from "next-view-transitions";
 
 export const BlogCard: React.FC<BlogMetadata> = ({ frontmatter, slug }) => (
     <>
-      
+
         <Link
             href={`/blog/${slug}`}
             className="hover:bg-secondary/10  rounded   transition-all duration-200 ease-in-out hover:scale-101 p-2"

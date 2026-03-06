@@ -1,12 +1,6 @@
+import Image from "next/image";
 import { Container } from "@/src/components/ui/Container";
 import { Heading } from "@/src/components/ui/Heading";
-
-import Image from "next/image";
-import JavaScript from "@/src/components/ui/icons/JavaScript";
-import TypeScript from "@/src/components/ui/icons/TypeScript";
-import ReactIcon from "@/src/components/ui/icons/ReactIcon";
-import NextJs from "@/src/components/ui/icons/NextJs";
-import TailwindCss from "@/src/components/ui/icons/TailwindCss";
 import { Tooltip } from "@/src/components/ui/tool-tip";
 import { Timeline } from "@/src/components/ui/Timeline";
 import { mySkills } from "@/src/config/About";
@@ -117,7 +111,7 @@ export default function About() {
         </Heading>
         <div className="mx-6 my-4">
           <div className="mt-8 flex flex-col gap-4 md:flex-row">
-            <Image className="size-40 md:size-55 rounded-lg shadow-[0px_0px_3px_1px_var(--color-secondary)]" src="/assets/avatar.jpg" alt="Profile Image" width={500} height={500} />
+            <Image className="size-40 md:size-55 rounded-lg shadow-[0px_0px_3px_1px_var(--color-secondary)]" src="/assets/avatar.JPG" alt="Profile Image" width={500} height={500} />
 
             <div className="mt-4">
               <Heading as="h3" className="text-2xl font-bold md:p-0 p-0 tracking-wide">Saif Ali Khan</Heading>
@@ -140,53 +134,3 @@ export default function About() {
     </>
   );
 }
-// {
-//   <div classNameName="flex min-h-screen items-start justify-start">
-//   <Container className="min-h-screen px-5 md:px-8 pt-24 pb-12">
-//     <Heading className="mb-8 md:p-0">About Me</Heading>
-//     <div className="flex flex-col md:flex-row gap-4 ">
-//       <div className="size-60 px-4">
-//         <Image
-//           className="rounded-lg"
-//           src={
-//             "https://saifalikhan99.vercel.app/_next/image?url=%2Fimages%2Fdp.jpg&w=828&q=75"
-//           }
-//           width={500}
-//           height={500}
-//           alt="profile picture"
-//         />
-//       </div>
-//       <div>
-//         <Heading className="">Saif Ali Khan</Heading>
-//         <SubHeading className="">
-//           I am a passionate developer who loves creating amazing web
-//           experiences. I am always looking for new challenges and
-//           opportunities to learn and grow.
-//         </SubHeading>
-//         <p className="mx-10 my-4 mt-10 font-medium text-neutral-700 text-shadow-xs md:text-lg dark:text-neutral-300">
-//           Skills
-//         </p>
-//         <div className="ml-9 flex gap-1">
-//           {[
-//             <JavaScript key="javascript" />,
-//             <TypeScript key="typescript" />,
-//             <ReactIcon key="react" />,
-//             <NextJs key="nextjs" />,
-//             <TailwindCss key="tailwindcss" />,
-//           ].map((icon, i) => (
-//             <Tooltip key={i} content="name  ">{icon}</Tooltip>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//     <div className="bg-secondary/40 mask-l-from-90% mask-r-from-90% my-10 h-px  inset-0" />
-
-//     <div className="">
-//       <Timeline
-
-//         data={data}
-//       />
-//     </div>
-//   </Container>
-// </div>
-// }
