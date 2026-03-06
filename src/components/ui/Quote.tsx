@@ -1,13 +1,13 @@
 import { cn } from "@/src/lib/utils";
 
 type QuoteProps = {
-  text: string;
-  author?: string;
-  source?: string;
+  content: string;
+  anime: string
+  character: string;
   className?: string;
 };
 
-export function Quote({ text, author, source, className }: QuoteProps) {
+export function Quote({ content, anime, character, className }: QuoteProps) {
   return (
     <figure
       className={cn(
@@ -30,13 +30,14 @@ export function Quote({ text, author, source, className }: QuoteProps) {
         </svg>
       </span>
       <blockquote className="text-forground relative pr-4 text-base leading-relaxed italic">
-        {text}
+        {content}
       </blockquote>
-      {(author || source) && (
+      {anime && character && (
         <figcaption className="text-muted-forground relative mt-4 text-right text-xs font-medium">
-          {author && <span className="italic">{author}</span>}
-          {author && source && <span>, </span>}
-          {source && <span>{source}</span>}
+
+
+          {character && <span>{character}, </span>}
+          {anime && <span>{anime}</span>}
         </figcaption>
       )}
     </figure>

@@ -7,12 +7,12 @@ import { heroConfig, skillComponents } from '@/src/config/Hero'
 import { parseTemplate } from '@/src/lib/hero'
 import Skill from '../common/Skill'
 
-const FALLBACK_RESUME_URL = process.env.RESUME_URL;
+
 
 export const Hero = ({ resumeUrl }: { resumeUrl?: string }) => {
 
   const { name, title, avatar, skills, description } = heroConfig;
-  const resumeHref = resumeUrl || FALLBACK_RESUME_URL;
+  const resumeHref = resumeUrl || process.env.RESUME_URL!;
 
   const renderDescription = () => {
     const parts = parseTemplate(description.template, skills);
