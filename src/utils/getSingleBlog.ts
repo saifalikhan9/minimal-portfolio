@@ -1,4 +1,4 @@
-import type {  BlogData, BlogMetadata } from "@/src/types/Blogs";
+import type { BlogData, BlogMetadata } from "@/src/types/Blogs";
 import { sanityClient } from "../lib/sanity-client";
 
 export const getAllSBlogs = async (): Promise<Array<BlogMetadata>> => {
@@ -14,7 +14,16 @@ export const getAllSBlogs = async (): Promise<Array<BlogMetadata>> => {
 
   let posts: any[] = [];
   try {
-    posts = await sanityClient.fetch(query);
+    posts = await sanityClient.fetch(
+      query,
+      {},
+      {
+        next: {
+          revalidate: 60,
+          tags: ["blogs"],
+        },
+      },
+    );
   } catch (error) {
     console.error("Sanity: failed to fetch posts (getAllSBlogs)", error);
     return [];
@@ -31,8 +40,6 @@ export const getAllSBlogs = async (): Promise<Array<BlogMetadata>> => {
   }));
 };
 
-
-
 export const getSingleSanityBlog = async (
   slug: string,
 ): Promise<BlogData | null> => {
@@ -48,7 +55,16 @@ export const getSingleSanityBlog = async (
 
   let post: any = null;
   try {
-    post = await sanityClient.fetch(query, { slug });
+    post = await sanityClient.fetch(
+      query,
+      { slug },
+      {
+        next: {
+          revalidate: 60,
+          tags: ["blogs"],
+        },
+      },
+    );
   } catch (error) {
     console.error("Sanity: failed to fetch post (getSingleSanityBlog)", {
       slug,
@@ -69,4 +85,3 @@ export const getSingleSanityBlog = async (
     content: post.content, // markdown string
   };
 };
-
