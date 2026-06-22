@@ -1,4 +1,3 @@
-
 export interface Project {
   title: string;
   description: string;
@@ -11,6 +10,7 @@ export interface Project {
   projectDetailsPageSlug: string;
   isWorking: boolean;
   slug?: string;
+  date: string;
 }
 
 export type ProjectFrontmatter = {
