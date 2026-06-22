@@ -32,10 +32,33 @@ export const projects: Project[] = [
     projectDetailsPageSlug: "second-brain",
     isWorking: true,
   },
+  {
+    title: "AI-Assisted Job Application Tracker",
+    date: "2025-06-15",
+    description:
+      "Built a Kanban-style job application tracker that uses AI to extract structured information directly from job descriptions. Users can paste a job posting, and the system automatically identifies details such as company, role, location, and requirements before creating a new board entry. Implemented drag-and-drop workflow management, persistent state updates, and an intuitive application pipeline across stages like Applied, Interviewing, and Offer.",
+    imageLink: "/assets/kanban.png",
 
+    linkLink: "https://ai-assisted-job-application-tracker-hazel.vercel.app/",
+
+    technologies: [
+      { name: "Next.js", icon: <NextJs key="nextjs" /> },
+      { name: "TypeScript", icon: <TypeScript key="typescript" /> },
+      { name: "React", icon: <ReactIcon key="react" /> },
+      { name: "Tailwind CSS", icon: <TailwindCss key="tailwind" /> },
+      { name: "Gemini", icon: <Gemini key="gemini" /> },
+    ],
+
+    githubLink:
+      "https://github.com/saifalikhan9/AI-Assisted-Job-Application-Tracker",
+
+    details: true,
+    projectDetailsPageSlug: "ai-job-tracker",
+    isWorking: true,
+  },
   {
     title: "Resume Roast",
-    date: "2026-05-20",
+    date: "2025-09-20",
     description:
       "Built Resume Roast, an AI-powered resume review platform that delivers brutally honest yet actionable feedback, helping users improve their resumes through engaging and memorable critiques.",
     imageLink: "/assets/resume-roast.png",

@@ -1,0 +1,214 @@
+---
+title: "AI-Assisted Job Application Tracker"
+description: "A Kanban-style job application tracker that uses AI to extract structured job information from pasted job descriptions and automatically organize applications."
+date: "2025-06-15"
+tags: ["Next.js", "TypeScript", "Gemini", "Kanban Board", "Drag & Drop", "AI", "Productivity"]
+timeline: 1 week
+role: "Full Stack"
+team: "Solo"
+status: "Completed"
+liveLink: "https://ai-assisted-job-application-tracker-hazel.vercel.app/"
+imageUrl: "/assets/kanban.png"
+githubLink: "https://github.com/saifalikhan9/AI-Assisted-Job-Application-Tracker"
+---
+
+## Overview
+
+**AI-Assisted Job Application Tracker** is a productivity-focused web application designed to help job seekers organize and manage their application pipeline efficiently.
+
+Unlike traditional job trackers that require manual data entry, this platform uses AI to automatically extract important details from job descriptions and create structured application records. Users can simply paste a job posting, and the system automatically identifies key information before placing the application into a Kanban-style workflow.
+
+---
+
+## Motivation
+
+This project was originally developed as an evaluation task for an internship role, serving as a hands-on opportunity to learn and demonstrate rapid full-stack development and AI integration. 
+
+While applying for jobs, I found myself repeatedly performing the same tasks:
+- Copying company names
+- Entering job titles manually
+- Tracking application stages
+- Managing multiple job boards
+- Updating spreadsheets
+
+This process quickly became repetitive and time-consuming. The goal of this project was to tackle the evaluation prompt by reducing this friction, combining AI-powered information extraction with an intuitive drag-and-drop workflow.
+
+---
+
+## Core Features
+
+### AI-Powered Job Parsing
+Users can paste an entire job description into the application. The AI system automatically extracts:
+- Company name
+- Job title
+- Location
+- Employment type
+- Required skills
+- Experience requirements
+
+The extracted information is then converted into a structured application record.
+
+### Kanban Workflow Management
+Applications move through customizable stages:
+- Applied
+- Screening
+- Interviewing
+- Offer
+- Rejected
+
+Users can visualize their entire job search process from a single dashboard.
+
+### Drag-and-Drop Interactions
+The application provides a smooth drag-and-drop experience for managing application status. Users can:
+- Move applications between stages
+- Reorganize priorities
+- Update workflows instantly
+
+State updates occur immediately, creating a responsive user experience.
+
+### Application Dashboard
+The dashboard provides:
+- Centralized application management
+- Status tracking
+- Organized workflow visualization
+- Quick access to job details
+
+This helps users maintain a clear overview of their job search progress.
+
+---
+
+## High-Level Workflow
+
+### Job Creation Flow
+1. User finds a job posting
+2. User pastes the job description
+3. AI processes the content
+4. Structured information is extracted
+5. Application card is created
+6. Card appears in the Kanban board
+
+### Application Tracking Flow
+1. User reviews application status
+2. User drags card to a new stage
+3. State updates instantly
+4. Changes are persisted
+5. Board reflects the latest pipeline status
+
+---
+
+## AI Extraction Pipeline
+
+The core intelligence of the platform comes from its information extraction workflow.
+
+### Processing Steps
+1. Receive raw job description
+2. Clean and normalize content
+3. Send context to Gemini
+4. Extract structured fields
+5. Validate output
+6. Create application record
+
+This eliminates repetitive manual entry while maintaining consistency across applications.
+
+---
+
+## Prompt Engineering Strategy
+
+The AI model is instructed to return structured information only. Expected outputs include:
+- Company Name
+- Role Title
+- Location
+- Skills
+- Experience Level
+
+By enforcing a predictable response structure, the system can reliably transform unstructured text into application records.
+
+---
+
+## Drag-and-Drop Architecture
+
+The Kanban board is designed around column-based state management. Each application contains:
+- Unique identifier
+- Status
+- Metadata
+- Position information
+
+When a card is moved:
+1. Source column is updated
+2. Destination column is updated
+3. Local state changes immediately
+4. Changes are synchronized with storage
+
+This creates a fluid and responsive experience.
+
+---
+
+## Technical Challenges
+
+### Extracting Consistent Job Data
+Job descriptions vary significantly between companies. Challenges included:
+- Different formatting styles
+- Missing information
+- Inconsistent terminology
+
+This was solved through prompt refinement and structured extraction rules.
+
+### Managing Drag-and-Drop State
+Keeping board state synchronized while maintaining smooth interactions required careful state management. The solution involved:
+- Optimistic UI updates
+- Predictable state transitions
+- Efficient re-rendering
+
+### Balancing Automation and Control
+While AI handles data extraction, users still retain full control over application information and workflow progression. This creates a balance between automation and user ownership.
+
+---
+
+## Tech Stack
+
+### Frontend
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+
+### AI Integration
+- Gemini API
+- Prompt Engineering
+- Structured Data Extraction
+
+### State Management
+- React State
+- Drag-and-Drop Logic
+
+### Deployment
+- Vercel
+
+---
+
+## Future Improvements
+
+Potential enhancements include:
+- Resume-to-job matching
+- AI-generated cover letters
+- Interview preparation suggestions
+- Application analytics
+- Email integration
+- Automatic job scraping
+- Calendar synchronization
+
+---
+
+## Impact
+
+The AI-Assisted Job Application Tracker transforms a traditionally manual process into an intelligent workflow.
+
+By combining AI-powered information extraction with a Kanban-style interface, the platform helps users focus on applying for jobs rather than managing spreadsheets and repetitive data entry.
+
+The project demonstrates practical experience with:
+- AI integration
+- Prompt engineering
+- Information extraction
+- Interactive frontend architecture
+- Drag-and-drop systems
+- Full-stack application development

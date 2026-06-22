@@ -1,5 +1,9 @@
+import { projects } from "@/src/constants/Projects";
 import { ProjectsList } from "../Projects/ProjectsList";
 export default function Projects() {
+  const latestProjects = [...projects]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 4);
 
   return (
     <section
@@ -10,7 +14,7 @@ export default function Projects() {
         Here are some of my projects that I have worked on.
       </p>
 
-      <ProjectsList  />
+      <ProjectsList projects={latestProjects} />
     </section>
   );
 }

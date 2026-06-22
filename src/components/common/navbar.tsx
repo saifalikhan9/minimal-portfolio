@@ -37,6 +37,7 @@ export const Navbar = () => {
 
   const NavItems = [
     { title: "About", href: "/about" },
+    { title: "Projects", href: "/projects" },
     { title: "Blog", href: "/blog" },
   ];
 
