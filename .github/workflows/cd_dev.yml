@@ -1,33 +1,30 @@
 name: Deploy to EC2
-
-on:
-  push:
+'on':
+  push: null
   branches:
     - main
-
-  jobs:
-  deploy:
+jobs:
+  deploy: null
   runs-on: ubuntu-latest
+steps:
+  - name: Deploy via SSH
+    uses: appleboy/ssh-action@v1.2.0
+    with:
+      host: '${{ secrets.EC2_HOST }}'
+      username: '${{ secrets.EC2_USER }}'
+      key: '${{ secrets.EC2_SSH_KEY }}'
+      script: |
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
-  steps:
-    - name: Deploy via SSH
-      uses: appleboy/ssh-action@v1.2.0
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+        cd ~/minimal-portfolio
 
-          cd ~/minimal-portfolio
+        git pull origin main
 
-          git pull origin main
+        pnpm install
 
-          pnpm install
+        pnpm build
 
-          pnpm build
+        pm2 restart dev_portfolio || pm2 start "pnpm start" --name dev_portfolio
 
-          pm2 restart dev_portfolio || pm2 start "pnpm start" --name dev_portfolio
-
-          pm2 save
+        pm2 save
