@@ -1,8 +1,7 @@
 name: Deploy to EC2
 'on':
-  push: null
-  branches:
-    - main
+  push:
+  branches: [main]
 jobs:
   deploy: null
   runs-on: ubuntu-latest
