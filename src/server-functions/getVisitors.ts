@@ -52,8 +52,9 @@
 // );
 
 export const getCount = async () => {
+  // Use %2F instead of TOTAL to target your root path ("/")
   const res = await fetch(
-    "https://saifalikhan99.goatcounter.com/counter/TOTAL.json",
+    "https://saifalikhan99.goatcounter.com/counter/%2F.json",
     {
       next: { revalidate: 60 },
     },
@@ -61,13 +62,19 @@ export const getCount = async () => {
 
   if (!res.ok) {
     console.error("Failed to fetch GoatCounter data");
-    
-    return 250 ; // this count is from the previous umami analytics 
+    return 250; // Fallback to Umami count
   }
 
   const data = await res.json();
+  
+  // This will now log your actual dashboard stats!
+  console.log(data); 
 
- 
-const count = 250+parseInt(data.count) // this count is from the previous umami analytics 
+  // Remove commas (if any) before parsing to prevent NaN/truncation issues on large numbers
+  const goatCount = parseInt((data.count || '0').replace(/,/g, ''), 10);
+  
+  // Combine Umami history with new GoatCounter stats
+  const count = 250 + goatCount; 
+  
   return count;
 };
