@@ -4,9 +4,10 @@ import "./globals.css";
 import { Providers } from "@/src/utils/Providers";
 import { Navbar } from "@/src/components/common/navbar";
 import { Footer } from "@/src/components/common/footer";
-import UmamiAnalytics from "@/src/components/analytics/UmamiAnalytics";
+// import UmamiAnalytics from "@/src/components/analytics/UmamiAnalytics";
 import { getPageMetadata } from "@/src/config/Meta";
 import { ViewTransitions } from 'next-view-transitions';
+import GoatAnalytics from "@/src/components/analytics/UmamiAnalytics";
 
 
 const geistSans = Geist({
@@ -38,7 +39,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Footer />
-            <UmamiAnalytics />
+            <GoatAnalytics />
           </Providers>
         </body>
       </html>
