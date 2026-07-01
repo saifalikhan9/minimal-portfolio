@@ -62,19 +62,14 @@ export const getCount = async () => {
 
   if (!res.ok) {
     console.error("Failed to fetch GoatCounter data");
-    return 250; // Fallback to Umami count
+    return 250;
   }
 
   const data = await res.json();
-  
-  // This will now log your actual dashboard stats!
-  console.log(data); 
 
-  // Remove commas (if any) before parsing to prevent NaN/truncation issues on large numbers
-  const goatCount = parseInt((data.count || '0').replace(/,/g, ''), 10);
-  
-  // Combine Umami history with new GoatCounter stats
-  const count = 250 + goatCount; 
-  
+  const goatCount = parseInt((data.count || "0").replace(/,/g, ""), 10);
+
+  const count = 250 + goatCount; // 250 the previoust visitors count of the umami analytics
+
   return count;
 };

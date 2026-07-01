@@ -5,26 +5,25 @@ import { Quote } from "@/src/components/ui/Quote";
 import { Hero } from "@/src/components/Landings/Hero";
 import { Visitors } from "@/src/components/common/Visitors";
 import { getSiteSettings } from "@/src/utils/getSiteSettings";
-import { getAnimeQuote } from "@/src/server-functions/getQuote";
+import { getAnimeQuote, getRandomVerse } from "@/src/server-functions/getQuote";
 import { GithubLanding } from "@/src/components/Landings/GithubLanding";
 import { Suspense } from "react";
 import { getGithubContributions } from "@/src/server-functions/githubContributions";
-
 
 export default async function Home() {
   const siteSettingsPromise = getSiteSettings();
 
   const quotePromise = getAnimeQuote();
 
-
   const githubPromise = getGithubContributions();
 
-  const [siteSettings, quoteData, contributions] =
-    await Promise.all([
-      siteSettingsPromise,
-      quotePromise,
-      githubPromise,
-    ]);
+  const data = await getRandomVerse();
+
+  const [siteSettings, quoteData, contributions] = await Promise.all([
+    siteSettingsPromise,
+    quotePromise,
+    githubPromise,
+  ]);
 
 
   return (
@@ -34,21 +33,17 @@ export default async function Home() {
         <Projects />
         <GithubLanding contributions={contributions} />
         <BlogsLanding />
-        {
-          quoteData  && <Quote
+        {data != null && (
+          <Quote
             className="m-2 my-20 md:mx-auto lg:max-w-200"
-            content={quoteData.content}
-            anime={quoteData.anime.name}
-            character={quoteData.character.name}
-
+            surah={data.varse.translation}
+            surahNumber={data.surah.number}
+            surahName={data.surah.name_english}
+            ayah={data.varse.ayah}
           />
-        }
-
-
-
+        )}
 
         <div className="mt-20">
-
           <Suspense fallback={<div className="h-10" />}>
             <Visitors />
           </Suspense>
@@ -57,7 +52,3 @@ export default async function Home() {
     </div>
   );
 }
-
-
-
-

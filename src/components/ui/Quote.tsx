@@ -1,13 +1,20 @@
 import { cn } from "@/src/lib/utils";
 
 type QuoteProps = {
-  content: string;
-  anime: string
-  character: string;
+  surah: string;
+  surahNumber: string;
+  surahName: string;
+  ayah: string;
   className?: string;
 };
 
-export function Quote({ content, anime, character, className }: QuoteProps) {
+export function Quote({
+  surah,
+  surahNumber,
+  ayah,
+  surahName,
+  className,
+}: QuoteProps) {
   return (
     <figure
       className={cn(
@@ -30,16 +37,15 @@ export function Quote({ content, anime, character, className }: QuoteProps) {
         </svg>
       </span>
       <blockquote className="text-forground relative pr-4 text-base leading-relaxed italic">
-        {content}
+        {surah}
       </blockquote>
-      {anime && character && (
-        <figcaption className="text-muted-forground relative mt-4 text-right text-xs font-medium">
-
-
-          {character && <span>{character}, </span>}
-          {anime && <span>{anime}</span>}
-        </figcaption>
-      )}
+      <figcaption className="text-muted-forground relative mt-4 text-right text-xs font-medium">
+        <span>Ayah Number : </span>
+        <span>{ayah}, </span>
+        <span>Surah Number : </span>
+        <span>{surahNumber}, </span>
+        <span>{surahName}, </span>
+      </figcaption>
     </figure>
   );
 }
