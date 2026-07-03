@@ -4,13 +4,14 @@ import { Project } from "@/src/types/Projects";
 import { Tooltip } from "../ui/tool-tip";
 import Image from "next/image";
 import Link from "next/link";
-import {  easeInOut, motion } from "motion/react";
+import { easeInOut, motion } from "motion/react";
 import {
   IconArrowNarrowRight,
   IconBrandGithub,
   IconWorld,
 } from "@tabler/icons-react";
 import { truncate } from "@/src/utils/utils";
+import { useRouter } from "next/navigation";
 
 export const ProjectCard = ({
   className,
@@ -25,13 +26,20 @@ export const ProjectCard = ({
   hovered: number | string | null;
   onMouseEnter: () => void;
 }) => {
+  const router = useRouter();
   return (
-    <div className="relative" onMouseEnter={onMouseEnter}>
+    <div
+      className="relative px-1 md:px-0"
+      onClick={() =>
+        router.push(`/projects/${projects.projectDetailsPageSlug}`)
+      }
+      onMouseEnter={onMouseEnter}
+    >
       {hovered === index && (
         <motion.div
           layoutId="hovered"
           id="hovered"
-          className="shadow-custom-inset-shadow dark:shadow-custom-inset-shadow-dark bg-secondary/20 absolute inset-0 -top-2 -left-2 w-full rounded-xl md:w-104"
+          className="shadow-custom-inset-shadow bg-secondary/20 absolute inset-0 -top-2 w-full rounded-xl md:-left-2 md:w-104"
         />
       )}
       <motion.div
@@ -51,7 +59,10 @@ export const ProjectCard = ({
         }}
         className={cn("p-1", className)}
       >
-        <ProjectImage image={projects.imageLink} imageDes={projects.description} />
+        <ProjectImage
+          image={projects.imageLink}
+          imageDes={projects.description}
+        />
 
         <ProjectTextContent
           title={projects.title}
@@ -60,7 +71,7 @@ export const ProjectCard = ({
           link={projects.linkLink}
         />
 
-        <div className="mx-2 my-4  flex items-center justify-between">
+        <div className="mx-2 my-4 flex items-center justify-between">
           <div className="inline-flex gap-x-2">
             {projects.technologies.map((tech, techIndex) => (
               <Tooltip
@@ -97,7 +108,7 @@ const ProjectImage = ({
 }) => {
   return (
     <Image
-      className={cn("h-60 rounded-xl object-cover", className)}
+      className={cn("min-h-60 w-full rounded-xl object-cover", className)}
       alt={imageDes}
       width={500}
       height={500}
@@ -118,27 +129,30 @@ const ProjectTextContent = ({
   link: string;
 }) => {
   return (
-    <div className="px-2">
-      <div className="text-forground my-3 flex items-center justify-between">
-        <h2 className="text-lg font-medium md:text-xl">{title}</h2>
-        <div className="relative z-20 inline-flex gap-2">
-          <Link
-            className="hover:text-muted-forground transition-all duration-200 ease-in-out"
-            href={github}
-          >
-            {<IconBrandGithub className="stroke-1" />}
+    <div className="">
+      <div className="text-forground my-2 flex items-start justify-between">
+        <h2 className="px-2 text-lg font-medium md:text-xl">{title}</h2>
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          className="relative inline-flex gap-2 pt-1"
+        >
+          <Link className="text-forground" href={github}>
+            {
+              <IconBrandGithub className="fill-muted-forground/10 hover:fill-muted-forground/20 size-5 stroke-1" />
+            }
           </Link>
           {link && (
-            <Link
-              className="hover:text-muted-forground transition-all duration-200 ease-in-out"
-              href={link}
-            >
-              {<IconWorld className="stroke-1" />}
+            <Link className="text-forground" href={link}>
+              {
+                <IconWorld className="fill-muted-forground/10 hover:fill-muted-forground/20 size-5 stroke-1" />
+              }
             </Link>
           )}
         </div>
       </div>
-      <p className="text-muted-forground text-sm">
+      <p className="text-muted-forground px-2 text-sm">
         {truncate(description, 200)}
       </p>
     </div>

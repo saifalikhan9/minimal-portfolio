@@ -1,7 +1,7 @@
 "use client";
 import { Container } from "../ui/Container";
 import Image from "next/image";
-import { Link } from 'next-view-transitions'
+import { Link } from "next-view-transitions";
 import {
   useMotionValueEvent,
   motion,
@@ -46,7 +46,9 @@ export const Navbar = () => {
       <Container className="">
         <motion.nav
           animate={{
-            boxShadow: scrolled ? "var(--shadow-custom)" : "none",
+            boxShadow: scrolled
+              ? " var(--shadow-custom)"
+              : "none",
             backdropFilter: scrolled ? "blur(10px)" : "none",
             width: scrolled ? (innerWidth >= 1024 ? "50%" : "82%") : "100%",
             transition: { duration: 0.5, ease: "easeInOut" },
@@ -64,7 +66,7 @@ export const Navbar = () => {
                 width={100}
                 height={100}
                 src="https://github.com/saifalikhan9/Portfolio/blob/main/public/images/dp.jpg?raw=true"
-                alt=""
+                alt="Profile Picture"
               />
             </Link>
             <div className="flex items-center gap-2">
@@ -122,7 +124,10 @@ export const Navbar = () => {
                         "transition-all duration-200 active:scale-90",
                       )}
                     >
-                      <IconSunFilled size={18} className="transition-all duration-200" />
+                      <IconSunFilled
+                        size={18}
+                        className="transition-all duration-200"
+                      />
                     </button>
                   ) : (
                     <button
@@ -135,7 +140,10 @@ export const Navbar = () => {
                         "transition-all duration-200 active:scale-90",
                       )}
                     >
-                      <IconMoonFilled size={18} className="transition-all duration-200" />
+                      <IconMoonFilled
+                        size={18}
+                        className="transition-all duration-200"
+                      />
                     </button>
                   )}
                 </div>
@@ -145,92 +153,95 @@ export const Navbar = () => {
         </motion.nav>
       </Container>
 
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {isMenuOpen && (
+              <>
+                {/* Blur overlay */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.18 }}
+                  className="fixed inset-0 z-40 md:hidden"
+                  style={{
+                    backdropFilter: "blur(6px)",
+                    WebkitBackdropFilter: "blur(6px)",
+                  }}
+                  onClick={() => setIsMenuOpen(false)}
+                />
 
-      {mounted && createPortal(
-        <AnimatePresence>
-          {isMenuOpen && (
-            <>
-              {/* Blur overlay */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.18 }}
-                className="fixed inset-0 z-40 md:hidden"
-                style={{ backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)" }}
-                onClick={() => setIsMenuOpen(false)}
-              />
+                {/* Dropdown — mirrors nav shrink animation */}
+                <motion.div
+                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                  animate={{
+                    opacity: 1,
+                    y: scrolled ? 10 : 0,
+                    scale: 1,
+                    width: scrolled ? "82%" : "90%",
+                  }}
+                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                  transition={{
+                    duration: 0.18,
+                    ease: "easeInOut",
 
-              {/* Dropdown — mirrors nav shrink animation */}
-              <motion.div
-                initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                animate={{
-                  opacity: 1,
-                  y: scrolled ? 10 : 0,
-                  scale: 1,
-                  width: scrolled ? "82%" : "90%",
-                }}
-                exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                transition={{
-
-                  duration: 0.18,
-                  ease: "easeInOut",
-
-                  width: { duration: 0.5, ease: "easeInOut" },
-                  y: { duration: 0.5, ease: "easeInOut" },
-                }}
-
-
-                className="fixed top-20 inset-x-0 mx-auto z-50 flex flex-col gap-1 rounded-3xl border border-neutral-200/60 bg-primary/90 p-2 text-sm shadow-2xl md:hidden dark:border-neutral-800/60"
-                style={{ backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)" }}
-              >
-                {NavItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    href={item.href}
-                    className="relative px-3 py-2"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <span className="relative z-10 text-2xl md:text-sm">
-                      {item.title}
-                    </span>
-                  </Link>
-                ))}
-                <div className="mx-3">
-                  {theme === "dark" ? (
-                    <button
-                      onClick={() => setTheme("light")}
-                      className={cn(
-                        "dark cursor-pointer rounded-lg p-[0.4rem]",
-                        "text-neutral-600 dark:text-white",
-                        "hover:bg-neutral-300 dark:bg-black dark:hover:bg-neutral-900",
-                        "inset-shadow-[1px_1px_4px_2.3px_rgba(0,0,0,0.1)] dark:ring dark:inset-shadow-[0_1px_2px_var(--color-neutral-500),0_-2px_4px_var(--color-neutral-500)] dark:ring-neutral-500",
-                        "transition-all duration-200 active:scale-90",
-                      )}
+                    width: { duration: 0.5, ease: "easeInOut" },
+                    y: { duration: 0.5, ease: "easeInOut" },
+                  }}
+                  className="bg-primary/90 fixed inset-x-0 top-20 z-50 mx-auto flex flex-col gap-1 rounded-3xl border border-neutral-200/60 p-2 text-sm shadow-2xl md:hidden dark:border-neutral-800/60"
+                  style={{
+                    backdropFilter: "blur(10px)",
+                    WebkitBackdropFilter: "blur(10px)",
+                  }}
+                >
+                  {NavItems.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.href}
+                      className="relative px-3 py-2"
+                      onClick={() => setIsMenuOpen(false)}
                     >
-                      <IconSunFilled className="md:4 size-7 transition-all duration-200" />
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => setTheme("dark")}
-                      className={cn(
-                        "cursor-pointer rounded-lg p-[0.4rem]",
-                        "text-neutral-600 dark:text-white",
-                        "hover:bg-neutral-300 dark:bg-black dark:hover:bg-neutral-900",
-                        "inset-shadow-[1px_1px_4px_2.3px_rgba(0,0,0,0.1)] dark:ring dark:inset-shadow-[0_1px_2px_var(--color-neutral-500),0_-2px_4px_var(--color-neutral-500)] dark:ring-neutral-500",
-                        "transition-all duration-200 active:scale-90",
-                      )}
-                    >
-                      <IconMoonFilled className="md:4 size-7 transition-all duration-200" />
-                    </button>
-                  )}
-                </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>,
-        document.body
-      )}
+                      <span className="relative z-10 text-2xl md:text-sm">
+                        {item.title}
+                      </span>
+                    </Link>
+                  ))}
+                  <div className="mx-3">
+                    {theme === "dark" ? (
+                      <button
+                        onClick={() => setTheme("light")}
+                        className={cn(
+                          "dark cursor-pointer rounded-lg p-[0.4rem]",
+                          "text-neutral-600 dark:text-white",
+                          "hover:bg-neutral-300 dark:bg-black dark:hover:bg-neutral-900",
+                          "inset-shadow-[1px_1px_4px_2.3px_rgba(0,0,0,0.1)] dark:ring dark:inset-shadow-[0_1px_2px_var(--color-neutral-500),0_-2px_4px_var(--color-neutral-500)] dark:ring-neutral-500",
+                          "transition-all duration-200 active:scale-90",
+                        )}
+                      >
+                        <IconSunFilled className="md:4 size-7 transition-all duration-200" />
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => setTheme("dark")}
+                        className={cn(
+                          "cursor-pointer rounded-lg p-[0.4rem]",
+                          "text-neutral-600 dark:text-white",
+                          "hover:bg-neutral-300 dark:bg-black dark:hover:bg-neutral-900",
+                          "inset-shadow-[1px_1px_4px_2.3px_rgba(0,0,0,0.1)] dark:ring dark:inset-shadow-[0_1px_2px_var(--color-neutral-500),0_-2px_4px_var(--color-neutral-500)] dark:ring-neutral-500",
+                          "transition-all duration-200 active:scale-90",
+                        )}
+                      >
+                        <IconMoonFilled className="md:4 size-7 transition-all duration-200" />
+                      </button>
+                    )}
+                  </div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>,
+          document.body,
+        )}
     </>
   );
 };

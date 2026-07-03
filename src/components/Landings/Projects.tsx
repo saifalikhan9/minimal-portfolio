@@ -10,7 +10,7 @@ export default function Projects() {
       id="/projects"
       className="shadow-sectionInset dark:shadow-sectionInset-dark my-4 px-3 py-4 md:px-10"
     >
-      <p className="text-muted-forground py-2 text-sm">
+      <p className="text-muted-forground py-2 pb-4 text-sm">
         Here are some of my projects that I have worked on.
       </p>
 

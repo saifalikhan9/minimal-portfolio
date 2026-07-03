@@ -18,6 +18,7 @@ export const ProjectsList = ({projects}:{projects:Project[]}) => {
       >
         {projects.map((project, inx) => (
           <ProjectCard
+
             key={`${project.title}`}
             index={`card-${inx}`}
             projects={project}

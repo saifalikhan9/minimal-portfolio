@@ -21,7 +21,7 @@ export const ProjectContents = ({
   const [imgError, setImageError] = useState(false);
   return (
     <Container className="px-6 pt-30">
-      <div className="mx-auto max-h-120 overflow-clip rounded-2xl shadow-[0px_2px_5px_2px_var(--color-neutral-600)] dark:shadow-none">
+      <div className="mx-auto max-w-4xl overflow-clip rounded-2xl shadow-[0px_2px_5px_2px_var(--color-neutral-600)] dark:shadow-none">
         {imgError ? (
           <Image
             className="mx-auto rounded-2xl"

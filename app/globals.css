@@ -2,13 +2,25 @@
 @plugin "@tailwindcss/typography";
 @custom-variant dark (&:where(.dark, .dark *));
 
-
 :root {
   --background: var(--color-neutral-100);
   --primary: var(--color-neutral-200);
   --forground: var(--color-neutral-800);
   --muted-forground: var(--color-neutral-600);
   --secondary: var(--color-neutral-500);
+
+  /* Shadows */
+  --shadow-custom:
+    0px 2px 3px -1px rgba(0, 0, 0, 0.3),
+    0px 1px 0px 0px rgba(255, 255, 255, 0.05),
+    0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+
+  --shadow-sectionInset:
+    0px 1px 4px 0px var(--color-neutral-300) inset,
+    0px -1px 4px 0px var(--color-neutral-300) inset;
+
+  --shadow-custom-inset-shadow:
+    1px 1px 4px 2.3px rgba(0, 0, 0, 0.1) inset;
 }
 
 .dark {
@@ -17,42 +29,33 @@
   --forground: var(--color-neutral-300);
   --muted-forground: var(--color-neutral-400);
   --secondary: var(--color-neutral-500);
-}
- 
-@theme inline {
+
+  /* Override the SAME variables */
   --shadow-custom:
-     0px 2px 3px -1px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.05),
+    1px 3px 3px -1px rgba(0, 0, 0, 0.3),
+    0px 1px 0px 0px rgba(0, 0, 0, 0.05),
     0px 0px 0px 1px rgba(0, 0, 0, 0.1);
-  
-  --shadow-custom-dark:
-    0px 2px 3px -1px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.05),
-    0px 0px 0px 1px rgba(255, 255, 255, 0.1);
 
   --shadow-sectionInset:
-  0px 1px 4px 0px var(--color-neutral-300) inset,
-  0px -1px 4px 0px var(--color-neutral-300) inset;
-  
-  --shadow-sectionInset-dark:
     0px 1px 4px 0px var(--color-neutral-800) inset,
     0px -1px 4px 0px var(--color-neutral-800) inset;
 
-    /* Pure CSS equivalent of the Tailwind classes for "inset-shadow-[1px_1px_4px_2.3px_rgba(0,0,0,0.1)] dark:ring dark:inset-shadow-[0_1px_2px_var(--color-neutral-500),0_-2px_4px_var(--color-neutral-500)] dark:ring-neutral-500" */
-
-    --shadow-custom-inset-shadow :
-        1px 1px 4px 2.3px rgba(0,0,0,0.1) inset;
-        
-    
-    --shadow-custom-inset-shadow-dark :
-        0 1px 2px var(--color-neutral-500)  inset,
-        0 -2px 4px var(--color-neutral-500)  inset;
-  
-
-
+  --shadow-custom-inset-shadow:
+    0 1px 2px var(--color-neutral-500) inset,
+    0 -2px 4px var(--color-neutral-500) inset;
+}
+ 
+@theme inline {
   --color-background: var(--background);
   --color-primary: var(--primary);
   --color-forground: var(--forground);
   --color-muted-forground: var(--muted-forground);
   --color-secondary: var(--secondary);
+
+  --shadow-custom: var(--shadow-custom);
+  --shadow-sectionInset: var(--shadow-sectionInset);
+  --shadow-custom-inset-shadow: var(--shadow-custom-inset-shadow);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

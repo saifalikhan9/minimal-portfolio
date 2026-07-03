@@ -29,13 +29,13 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen items-start justify-start">
       <Container className="relative min-h-screen pt-24 pb-12">
-        <Hero resumeUrl={siteSettings.resumeUrl} />
+        <Hero resumeUrl={siteSettings?.resumeUrl ||""} />
         <Projects />
         <GithubLanding contributions={contributions} />
         <BlogsLanding />
         {data != null && (
           <Quote
-            className="m-2 my-20 md:mx-auto lg:max-w-200"
+            className="m-2 my-20 md:mx-auto max-w-xl lg:max-w-3xl"
             surah={data.varse.translation}
             surahNumber={data.surah.number}
             surahName={data.surah.name_english}

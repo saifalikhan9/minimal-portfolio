@@ -40,11 +40,10 @@ export function Quote({
         {surah}
       </blockquote>
       <figcaption className="text-muted-forground relative mt-4 text-right text-xs font-medium">
-        <span>Ayah Number : </span>
+        <span>Ayah </span>
         <span>{ayah}, </span>
-        <span>Surah Number : </span>
-        <span>{surahNumber}, </span>
-        <span>{surahName}, </span>
+        <span>Surah </span>
+        <span>{surahName}. </span>
       </figcaption>
     </figure>
   );
