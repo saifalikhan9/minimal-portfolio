@@ -44,7 +44,7 @@
     0 1px 2px var(--color-neutral-500) inset,
     0 -2px 4px var(--color-neutral-500) inset;
 }
- 
+
 @theme inline {
   --color-background: var(--background);
   --color-primary: var(--primary);
@@ -58,4 +58,6 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-playfair: var(--font-playfair);
+
 }

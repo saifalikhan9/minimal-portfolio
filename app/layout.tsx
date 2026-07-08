@@ -1,5 +1,5 @@
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono,Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/src/utils/Providers";
 import { Navbar } from "@/src/components/common/navbar";
@@ -20,6 +20,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+});
+
 export const metadata = getPageMetadata("/")
 
 export default function RootLayout({
@@ -33,7 +38,7 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
 
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background [--pattern-fg:var(--color-gray-950)]/10 selection:bg-black selection:text-white dark:[--pattern-fg:var(--color-gray-100)]/10 dark:selection:bg-white dark:selection:text-black`}
+          className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased bg-background [--pattern-fg:var(--color-gray-950)]/10 selection:bg-black selection:text-white dark:[--pattern-fg:var(--color-gray-100)]/10 dark:selection:bg-white dark:selection:text-black`}
         >
           <Providers>
             <Navbar />
