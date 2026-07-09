@@ -9,29 +9,29 @@ import {
   useScroll,
 } from "motion/react";
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
-import { CloseIcon } from "../ui/icons/CloseIcon";
+
 import { IconMoonFilled, IconSunFilled } from "@tabler/icons-react";
 import { cn } from "@/src/lib/utils";
 import { useTheme } from "next-themes";
+import { usePathname } from "next/navigation";
 
 export const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [hovered, setHovered] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState<boolean>(false);
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const { scrollY } = useScroll();
-  
-  // FIX: Safely track window size on the client only
+
+  const pathname = usePathname();
+
   const [isDesktop, setIsDesktop] = useState(true);
 
   useEffect(() => {
     setMounted(true);
-    
+
     // Set initial size
     setIsDesktop(window.innerWidth >= 1024);
-    
+
     // Update on resize
     const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
     window.addEventListener("resize", handleResize);
@@ -52,6 +52,11 @@ export const Navbar = () => {
     { title: "Blog", href: "/blog" },
   ];
 
+  const highlightedIndex =
+    hovered !== null
+      ? hovered
+      : NavItems.findIndex((item) => item.href === pathname);
+
   return (
     <>
       <Container className="">
@@ -59,8 +64,8 @@ export const Navbar = () => {
           animate={{
             boxShadow: scrolled ? " var(--shadow-custom)" : "none",
             backdropFilter: scrolled ? "blur(10px)" : "none",
-            // FIX: Use the safely tracked state variable instead of raw innerWidth
-            width: scrolled ? (isDesktop ? "50%" : "82%") : "100%", 
+
+            width: scrolled ? (isDesktop ? "50%" : "82%") : "100%",
             transition: { duration: 0.5, ease: "easeInOut" },
             y: scrolled ? 10 : 0,
           }}
@@ -77,53 +82,51 @@ export const Navbar = () => {
                 height={100}
                 src="https://github.com/saifalikhan9/Portfolio/blob/main/public/images/dp.jpg?raw=true"
                 alt="Profile Picture"
-                priority // Tip: Add priority to your LCP images to load them faster
+                priority
               />
             </Link>
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-2">
                 <div
                   onMouseLeave={() => setHovered(null)}
-                  className="hidden items-center gap-2 text-sm md:flex"
+                  className="flex items-center text-sm md:gap-2"
                 >
                   {NavItems.map((item, index) => (
                     <Link
-                      className="group relative px-2 py-1 text-sm"
-                      key={index}
+                      key={item.href}
                       href={item.href}
                       onMouseEnter={() => setHovered(index)}
-                      onClick={() => setIsMenuOpen(false)}
+                      className="relative px-2 py-1 text-sm"
                     >
-                      {hovered === index && (
+                      {mounted && highlightedIndex === index && (
                         <motion.span
+                          layoutId="nav-item-hovered"
                           style={{
                             backgroundColor:
                               theme === "dark"
                                 ? "var(--color-neutral-100)"
                                 : "var(--color-neutral-800)",
                           }}
-                          layoutId="hovered"
-                          className="absolute inset-0 h-full w-full rounded-xl dark:bg-neutral-800"
+                          className="absolute inset-x-0 bottom-px mx-2 h-px rounded-xl md:bottom-0 md:mx-0 md:h-full"
                         />
                       )}
-                      <span className="relative z-10 group-hover:text-neutral-200 dark:group-hover:text-neutral-800">
+
+                      <span
+                        className={cn(
+                          "relative z-10 transition-colors duration-200",
+                          highlightedIndex === index
+                            ? "text-background"
+                            : "text-foreground",
+                        )}
+                      >
                         {item.title}
                       </span>
                     </Link>
                   ))}
                 </div>
-                <button
-                  type="button"
-                  aria-label="Toggle menu"
-                  aria-expanded={isMenuOpen}
-                  onClick={() => setIsMenuOpen((prev) => !prev)}
-                  className="relative flex items-center justify-center px-2 text-neutral-900 transition hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-500 md:hidden dark:border-neutral-800/70 dark:text-white dark:hover:bg-neutral-900"
-                >
-                  <CloseIcon isOpen={isMenuOpen} />
-                </button>
               </div>
               {mounted && (
-                <div className="hidden lg:block">
+                <div className="">
                   {theme === "dark" ? (
                     <button
                       onClick={() => setTheme("light")}
@@ -135,7 +138,10 @@ export const Navbar = () => {
                         "transition-all duration-200 active:scale-90",
                       )}
                     >
-                      <IconSunFilled size={18} className="transition-all duration-200" />
+                      <IconSunFilled
+                        size={18}
+                        className="transition-all duration-200"
+                      />
                     </button>
                   ) : (
                     <button
@@ -148,7 +154,10 @@ export const Navbar = () => {
                         "transition-all duration-200 active:scale-90",
                       )}
                     >
-                      <IconMoonFilled size={18} className="transition-all duration-200" />
+                      <IconMoonFilled
+                        size={18}
+                        className="transition-all duration-200"
+                      />
                     </button>
                   )}
                 </div>
@@ -157,65 +166,6 @@ export const Navbar = () => {
           </div>
         </motion.nav>
       </Container>
-
-      {/* Portal logic remains the same, it is correctly gated by mounted */}
-      {mounted &&
-        createPortal(
-          <AnimatePresence>
-            {isMenuOpen && (
-              <>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.18 }}
-                  className="fixed inset-0 z-40 md:hidden"
-                  style={{
-                    backdropFilter: "blur(6px)",
-                    WebkitBackdropFilter: "blur(6px)",
-                  }}
-                  onClick={() => setIsMenuOpen(false)}
-                />
-                <motion.div
-                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                  animate={{
-                    opacity: 1,
-                    y: scrolled ? 10 : 0,
-                    scale: 1,
-                    width: scrolled ? "82%" : "90%",
-                  }}
-                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                  transition={{
-                    duration: 0.18,
-                    ease: "easeInOut",
-                    width: { duration: 0.5, ease: "easeInOut" },
-                    y: { duration: 0.5, ease: "easeInOut" },
-                  }}
-                  className="bg-primary/90 fixed inset-x-0 top-20 z-50 mx-auto flex flex-col gap-1 rounded-3xl border border-neutral-200/60 p-2 text-sm shadow-2xl md:hidden dark:border-neutral-800/60"
-                  style={{
-                    backdropFilter: "blur(10px)",
-                    WebkitBackdropFilter: "blur(10px)",
-                  }}
-                >
-                  {NavItems.map((item, index) => (
-                    <Link
-                      key={index}
-                      href={item.href}
-                      className="relative px-3 py-2"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <span className="relative z-10 text-2xl md:text-sm">
-                        {item.title}
-                      </span>
-                    </Link>
-                  ))}
-                  {/* Theme toggler omitted for brevity but remains the same */}
-                </motion.div>
-              </>
-            )}
-          </AnimatePresence>,
-          document.body,
-        )}
     </>
   );
 };

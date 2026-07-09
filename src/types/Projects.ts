@@ -27,4 +27,4 @@ export type ProjectFrontmatter = {
   technologies?: string[];
 };
 
-export type ProjectContent = React.ReactElement;
+export type ProjectContent = React.ReactElement<string,string>;

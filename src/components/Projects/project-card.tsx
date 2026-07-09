@@ -37,8 +37,8 @@ export const ProjectCard = ({
     >
       {hovered === index && (
         <motion.div
-          layoutId="hovered"
-          id="hovered"
+          layoutId="project-card-hovered"
+          id="project-card-hovered"
           className="shadow-custom-inset-shadow bg-secondary/20 absolute inset-0 -top-2 w-full rounded-xl md:-left-2 md:w-104"
         />
       )}

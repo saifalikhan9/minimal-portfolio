@@ -9,8 +9,8 @@ export const Container = ({
   return (
     <div
       className={cn(
-        "bg-primary   relative mx-auto w-full   md:max-w-4xl",
-        className
+        "bg-primary relative mx-auto w-full md:max-w-4xl",
+        className,
       )}
       {...props}
     >

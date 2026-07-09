@@ -1,6 +1,12 @@
 import { ProjectContents } from "@/src/components/Projects/Project-Content";
+import { Button } from "@/src/components/ui/Button";
+import { Container } from "@/src/components/ui/Container";
 import { getSingleProject } from "@/src/utils/getprojects";
+import { IconCalendarEvent } from "@tabler/icons-react";
 import type { Metadata } from "next";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import Image from "next/image";
+import Link from "next/link";
 
 export async function generateMetadata({
   params,
@@ -33,10 +39,79 @@ export default async function Page({ params }: { params: { slug: string } }) {
   if (!project) return null;
 
   const { content, frontmatter } = project;
-  
+
   return (
-    <div className="flex min-h-screen justify-start">
-      <ProjectContents frontmatter={frontmatter} content={content} />
-    </div>
+    <Container className="min-h-screen pt-24 pb-16">
+      <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 md:px-0">
+        <Link
+          href="/projects"
+          className="text-muted-forground hover:text-forground border-border/40 bg-background/40 hover:bg-secondary/10 w-fit rounded-full border px-3 py-1 text-xs transition-all duration-200"
+        >
+          ← Back to Projects
+        </Link>
+
+        <article className="">
+          <header className="border-secondary border-b">
+            <div className="shadow-custom-inset-shadow mx-auto max-w-3xl rounded-2xl p-2">
+              <div className="max-h-110 overflow-hidden rounded-xl">
+                <Image
+                  src={frontmatter.imageUrl}
+                  alt={frontmatter.title}
+                  width={500}
+                  height={500}
+                  className="block h-auto w-full object-cover"
+                />
+              </div>
+            </div>
+
+            <h1 className="font-playfair text-forground my-4 text-4xl font-medium">
+              {frontmatter.title}
+            </h1>
+            <p className="text-muted-forground text-xl">
+              {frontmatter.description}
+            </p>
+            <div className="my-4 flex items-center justify-between">
+              <span className="text-muted-forground inline-flex gap-2">
+                <div className="flex items-center justify-center">
+                  <IconCalendarEvent className="size-6 shrink-0" />
+                </div>
+              </span>
+              <Button className="px-5" variant="secondary">
+                Share
+              </Button>
+            </div>
+          </header>
+
+          <div className="">
+            {content}
+            {/* <MDXRemote source={content}/> */}
+            {/* <MDXRemote
+              source={content}
+              components={BlogComponents}
+              options={{
+                mdxOptions: {
+                  rehypePlugins: [
+                    [
+                      rehypeHighlight,
+                      {
+                        theme: "github-dark",
+                        transformers: [
+                          {
+                            pre(node) {
+                            
+                              delete node.properties.style;
+                            },
+                          },
+                        ],
+                      },
+                    ],
+                  ]
+                },
+              }}
+            /> */}
+          </div>
+        </article>
+      </div>
+    </Container>
   );
 }

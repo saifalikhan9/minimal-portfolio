@@ -102,14 +102,13 @@ export default async function Blogs({ params }: { params: { slug: string } }) {
                         transformers: [
                           {
                             pre(node) {
-                            
                               delete node.properties.style;
                             },
                           },
                         ],
                       },
                     ],
-                  ]
+                  ],
                 },
               }}
             />

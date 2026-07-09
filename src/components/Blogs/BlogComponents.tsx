@@ -32,7 +32,10 @@ export const BlogComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <h1 className="text-forground  mb-6 text-2xl font-bold" {...props}>
+    <h1
+      className="text-forground font-playfair mb-6 text-3xl font-bold"
+      {...props}
+    >
       {children}
     </h1>
   ),
@@ -43,7 +46,7 @@ export const BlogComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <h2 className="mt-8 mb-4 text-xl  font-semibold" {...props}>
+    <h2 className="font-playfair mt-14 mb-6 text-3xl font-semibold" {...props}>
       {children}
     </h2>
   ),
@@ -54,7 +57,7 @@ export const BlogComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <h3 className="mt-6 mb-3 text-lg font-medium" {...props}>
+    <h3 className="text-xl font-semibold mt-10 mb-4 text-forground/80" {...props}>
       {children}
     </h3>
   ),
@@ -66,7 +69,7 @@ export const BlogComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <p className="text-secondary mb-4 leading-7" {...props}>
+    <p className="text-secondary mb-4 text-base leading-8" {...props}>
       {children}
     </p>
   ),
@@ -89,7 +92,7 @@ export const BlogComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <ol className="mb-4 ml-6 list-decimal space-y-2" {...props}>
+    <ol className="mb-4 ml-6 list-decimal space-y-3" {...props}>
       {children}
     </ol>
   ),
@@ -100,7 +103,7 @@ export const BlogComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <li className="text-muted-foreground leading-7" {...props}>
+    <li className="text-muted-foreground  leading-7" {...props}>
       {children}
     </li>
   ),
@@ -137,7 +140,7 @@ export const BlogComponents = {
 
     return (
       <div className="not-prose my-8">
-        <div className="group shadow-custom dark:bg-neutral-900 bg-neutral-300 border-secondary/20 relative rounded-lg border p-1">
+        <div className="group shadow-custom border-secondary/20 relative rounded-lg border bg-neutral-300 p-1 dark:bg-neutral-900">
           <pre
             {...props}
             className="border-secondary/20 overflow-x-auto rounded-[7px] border bg-neutral-800 p-4 text-sm text-neutral-300 [&>code]:bg-transparent [&>code]:p-0"
