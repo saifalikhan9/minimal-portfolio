@@ -108,7 +108,7 @@ const ProjectImage = ({
 }) => {
   return (
     <Image
-      className={cn("min-h-60 w-full rounded-xl object-cover", className)}
+      className={cn("max-h-60 w-full rounded-xl object-cover", className)}
       alt={imageDes}
       width={500}
       height={500}

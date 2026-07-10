@@ -24,7 +24,6 @@
  * That's it! Your portfolio will automatically update with your information.
  */
 
-
 import NextJs from "../components/ui/icons/NextJs";
 import ReactIcon from "../components/ui/icons/ReactIcon";
 import TypeScript from "../components/ui/icons/TypeScript";
@@ -34,8 +33,7 @@ import { MongoDB } from "../components/ui/icons/MongoDB";
 import Prisma from "../components/ui/icons/Prisma";
 import JavaScript from "../components/ui/icons/JavaScript";
 import Motion from "../components/ui/icons/Motion";
-
-
+import { IconBrandAws } from "@tabler/icons-react";
 
 // Component mapping for skills
 export const skillComponents = {
@@ -48,54 +46,59 @@ export const skillComponents = {
   Prisma: Prisma,
   JavaScript: JavaScript,
   Motion: Motion,
+  AWS: IconBrandAws,
 };
 
 export const heroConfig = {
   // Personal Information
-  name: 'Saif',
-  title: 'A Full Stack web developer.',
+  name: "Saif",
+  title: "A Full Stack web developer.",
   avatar: "/assets/avatar.JPG",
 
   // Skills Configuration
   skills: [
     {
-      name: 'Javascript',
-      href: 'https://www.typescriptlang.org/',
-      component: 'JavaScript',
+      name: "React",
+      href: "https://react.dev/",
+      component: "ReactIcon",
     },
     {
-      name: 'Typescript',
-      href: 'https://www.typescriptlang.org/',
-      component: 'TypeScript',
-    },
-    {
-      name: 'React',
-      href: 'https://react.dev/',
-      component: 'ReactIcon',
-    },
-    {
-      name: 'Next.js',
-      href: 'https://nextjs.org/',
-      component: 'NextJs',
+      name: "Next.js",
+      href: "https://nextjs.org/",
+      component: "NextJs",
     },
 
     {
-      name: 'PostgreSQL',
-      href: 'https://www.postgresql.org/',
-      component: 'PostgreSQL',
+      name: "Typescript",
+      href: "https://www.typescriptlang.org/",
+      component: "TypeScript",
     },
     {
-      name: 'Motion',
-      href: 'https://motion.dev/',
-      component: 'Motion',
-    }
+      name: "Nodejs",
+      href: "",
+      component: "NodeJs",
+    },
+    {
+      name: "",
+      href: "",
+      component: "AWS",
+    },
+
+    {
+      name: "PostgreSQL",
+      href: "https://www.postgresql.org/",
+      component: "PostgreSQL",
+    },
+    {
+      name: "Motion",
+      href: "https://motion.dev/",
+      component: "Motion",
+    },
   ],
 
   // Description Configuration
   description: {
     template:
-      'I design and build interactive web apps using {skills:0} , {skills:1} , {skills:2} , {skills:3} , and {skills:4} , with a strong focus on UI design, smooth animations, and thoughtful micro-interactions using {skills:5} .',
+      "I design and build interactive web apps using {skills:0} , {skills:1} , {skills:2} , {skills:3} , and {skills:5} , with a strong focus on UI design, smooth animations, and thoughtful micro-interactions using {skills:6} .",
   },
-
-
-}
+};

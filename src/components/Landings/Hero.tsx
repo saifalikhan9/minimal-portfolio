@@ -25,8 +25,8 @@ export const Hero = ({ resumeUrl }: { resumeUrl?: string }) => {
           return null;
         }
         return (
-          <Skill key={part.key} name={part.skill.name} href={part.skill.href}>
-            <SkillComponent className="" />
+          <Skill  key={part.key} name={part.skill.name} href={part.skill.href}>
+            <SkillComponent className="pb-1 " />
           </Skill>
         );
       } else if (part.type === "bold" && "text" in part) {
@@ -37,7 +37,7 @@ export const Hero = ({ resumeUrl }: { resumeUrl?: string }) => {
         );
       } else if (part.type === "text" && "text" in part) {
         return (
-          <span key={part.key} className="whitespace-pre-wrap">
+          <span key={part.key} className="whitespace-pre-wrap ">
             {part.text}
           </span>
         );

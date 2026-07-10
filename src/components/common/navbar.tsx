@@ -36,9 +36,9 @@ export const Navbar = () => {
     <Container className="">
       <header
         className={cn(
-          "fixed top-3 left-1/2 z-100 flex w-full max-w-94 -translate-x-1/2 items-center justify-between gap-3 rounded-full p-1 transition-all duration-500 ease-in-out md:max-w-[52rem]",
+          "fixed top-3 left-1/2 z-100 flex w-full max-w-94 -translate-x-1/2 items-center justify-between gap-3 rounded-full p-1 transition-all duration-500 ease-in-out md:max-w-[51rem]",
           scrolled
-            ? "shadow-custom w-85 translate-y-5 backdrop-blur-sm md:w-180"
+            ? "shadow-custom w-85 translate-y-5 backdrop-blur-md md:w-160"
             : "",
         )}
       >

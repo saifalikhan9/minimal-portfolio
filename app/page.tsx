@@ -9,7 +9,7 @@ import { getAnimeQuote, getRandomVerse } from "@/src/server-functions/getQuote";
 import { GithubLanding } from "@/src/components/Landings/GithubLanding";
 import { Suspense } from "react";
 import { getGithubContributions } from "@/src/server-functions/githubContributions";
-import { Heading } from "@react-email/components";
+import { Heading } from "@/src/components/ui/Heading";
 
 export default async function Home() {
   const siteSettingsPromise = getSiteSettings();
@@ -25,25 +25,47 @@ export default async function Home() {
     quotePromise,
     githubPromise,
   ]);
+  const experiencePoints = [
+    "Developed and maintained web applications using Next.js, Tailwind CSS, and Framer Motion, ensuring seamless experiences across desktop, tablet, and mobile devices.",
 
+    "Built a CI/CD pipeline using GitHub Actions to automatically build and deploy the application to an AWS EC2 development server, streamlining releases and eliminating manual deployment steps.",
+
+    "Customized application theming and design systems to align with client branding requirements while collaborating directly with stakeholders to deliver scalable, production-ready solutions.",
+  ];
   return (
     <div className="flex min-h-screen items-start justify-start">
       <Container className="relative min-h-screen pt-24 pb-12">
         <Hero resumeUrl={siteSettings?.resumeUrl || ""} />
         {/* experience */}
+        <div className="bg-forground my-4 h-px w-full mask-x-from-10%" />
         <section id="experience" className="">
-          <div className="mx-10 my-10">
+          <div className="mx-10 my-6">
+            <Heading className="my-4 px-0 md:px-0 md:text-3xl">
+              Experience
+            </Heading>
+            <div className="inline-flex w-full justify-between">
+              <div className="inline-flex items-center gap-2">
+                <h2 className="text-xl font-bold">Gravity44</h2>
 
-          <p className="text-muted-forground py-2 pb-4 text-sm">Experience</p>
-          <Heading as="h3">Gravity44 </Heading>
-          <p className="text-muted-forground py-2 pb-4 text-xl">FrontEnd Developer</p>
+                <span className="inline-flex items-center gap-1.5 rounded-md border border-green-500 bg-green-500/10 px-2 py-1 text-xs font-medium">
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
+                  Working
+                </span>
+              </div>
+              <p className="text-secondary text-sm">March 2026 - Present</p>
+            </div>
+            <div className="my-1 inline-flex w-full justify-between">
+              <p className="text-muted-forground text-base font-medium">
+                Frontend Developer
+              </p>
+              <p className="text-secondary text-sm">Noida (Remote)</p>
+            </div>
 
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. In beatae
-            similique velit eveniet voluptate ipsum corrupti earum autem
-            excepturi reiciendis. Possimus fuga dolores optio blanditiis totam
-            iusto itaque dicta pariatur.
-          </p>
+            <ul className="text-secondary max-w-3xl list-disc space-y-2 py-2 pl-5 text-base">
+              {experiencePoints.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
           </div>
         </section>
         <Projects />
