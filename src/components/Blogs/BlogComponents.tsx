@@ -57,7 +57,10 @@ export const BlogComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <h3 className="text-xl font-semibold mt-10 mb-4 text-forground/80" {...props}>
+    <h3
+      className="text-forground/80 mt-10 mb-4 text-xl font-semibold"
+      {...props}
+    >
       {children}
     </h3>
   ),
@@ -103,7 +106,7 @@ export const BlogComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <li className="text-muted-foreground  leading-7" {...props}>
+    <li className="text-muted-foreground leading-7" {...props}>
       {children}
     </li>
   ),
