@@ -13,7 +13,7 @@ export const ProjectsList = ({projects}:{projects:Project[]}) => {
   return (
     <LayoutGroup>
       <div
-        onMouseLeave={() => setHovered(null)}
+        onMouseLeave={() => setHovered( null)}
         className="grid grid-cols-1 gap-6 md:grid-cols-2"
       >
         {projects.map((project, inx) => (

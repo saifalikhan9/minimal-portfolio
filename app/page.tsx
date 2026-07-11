@@ -10,6 +10,7 @@ import { GithubLanding } from "@/src/components/Landings/GithubLanding";
 import { Suspense } from "react";
 import { getGithubContributions } from "@/src/server-functions/githubContributions";
 import { Heading } from "@/src/components/ui/Heading";
+import { SectionContainer } from "@/src/components/ui/SectionContainer";
 
 export default async function Home() {
   const siteSettingsPromise = getSiteSettings();
@@ -35,39 +36,39 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen items-start justify-start">
       <Container className="relative min-h-screen pt-24 pb-12">
-        <Hero resumeUrl={siteSettings?.resumeUrl || ""} />
+        <SectionContainer>
+          <Hero resumeUrl={siteSettings?.resumeUrl || ""} />
+        </SectionContainer>
         {/* experience */}
-        <div className="bg-forground my-4 h-px w-full mask-x-from-10%" />
-        <section id="experience" className="">
-          <div className="mx-10 my-6">
-            <Heading className="my-4 px-0 md:px-0 md:text-3xl">
-              Experience
-            </Heading>
-            <div className="inline-flex w-full justify-between">
-              <div className="inline-flex items-center gap-2">
-                <h2 className="text-xl font-bold">Gravity44</h2>
+        <div className="bg-forground  h-px w-full mask-x-from-10%" />
 
-                <span className="inline-flex items-center gap-1.5 rounded-md border border-green-500 bg-green-500/10 px-2 py-1 text-xs font-medium">
-                  <span className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
-                  Working
-                </span>
-              </div>
-              <p className="text-secondary text-sm">March 2026 - Present</p>
-            </div>
-            <div className="my-1 inline-flex w-full justify-between">
-              <p className="text-muted-forground text-base font-medium">
-                Frontend Developer
-              </p>
-              <p className="text-secondary text-sm">Noida (Remote)</p>
-            </div>
+        <SectionContainer id="experience">
+          <Heading className="md:text-3xl">Experience</Heading>
+          <div className="inline-flex w-full justify-between">
+            <div className="inline-flex items-center gap-2">
+              <h2 className="text-xl font-bold">Gravity44</h2>
 
-            <ul className="text-secondary max-w-3xl list-disc space-y-2 py-2 pl-5 text-base">
-              {experiencePoints.map((point, index) => (
-                <li key={index}>{point}</li>
-              ))}
-            </ul>
+              <span className="inline-flex items-center gap-1.5 rounded-md border border-green-500 bg-green-500/10 px-2 py-1 text-xs font-medium">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
+                Working
+              </span>
+            </div>
+            <p className="text-secondary text-sm">March 2026 - Present</p>
           </div>
-        </section>
+          <div className="my-1 inline-flex w-full justify-between">
+            <p className="text-muted-forground text-base font-medium">
+              Frontend Developer
+            </p>
+            <p className="text-secondary text-sm">Noida (Remote)</p>
+          </div>
+
+          <ul className="text-secondary max-w-3xl list-disc space-y-2 py-2 pl-5 text-base">
+            {experiencePoints.map((point, index) => (
+              <li key={index}>{point}</li>
+            ))}
+          </ul>
+        </SectionContainer>
+
         <Projects />
         <GithubLanding contributions={contributions} />
         <BlogsLanding />

@@ -1,9 +1,9 @@
-
 export type BlogFrontmatter = {
   title: string;
   description: string;
   date: string;
   author: string;
+  imagesLink: string;
 };
 
 export type BlogData = {

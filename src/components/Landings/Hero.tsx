@@ -25,8 +25,8 @@ export const Hero = ({ resumeUrl }: { resumeUrl?: string }) => {
           return null;
         }
         return (
-          <Skill  key={part.key} name={part.skill.name} href={part.skill.href}>
-            <SkillComponent className="pb-1 " />
+          <Skill key={part.key} name={part.skill.name} href={part.skill.href}>
+            <SkillComponent className="pb-1" />
           </Skill>
         );
       } else if (part.type === "bold" && "text" in part) {
@@ -37,7 +37,7 @@ export const Hero = ({ resumeUrl }: { resumeUrl?: string }) => {
         );
       } else if (part.type === "text" && "text" in part) {
         return (
-          <span key={part.key} className="whitespace-pre-wrap ">
+          <span key={part.key} className="whitespace-pre-wrap">
             {part.text}
           </span>
         );
@@ -46,8 +46,8 @@ export const Hero = ({ resumeUrl }: { resumeUrl?: string }) => {
     });
   };
   return (
-    <div>
-      <div className="bg-forground/10 mx-3 my-4 size-24 overflow-clip rounded-xl p-1 md:mx-10">
+    <>
+      <div className="bg-forground/10 my-4 size-24 overflow-clip rounded-xl p-1">
         <Image
           className="rounded-[12px]"
           src={avatar}
@@ -59,11 +59,11 @@ export const Hero = ({ resumeUrl }: { resumeUrl?: string }) => {
       <Heading className="tracking-wide">
         Hi, I&apos;m {name} — <span className="text-secondary">{title}</span>
       </Heading>
-      <div className="text-secondary mt-4 px-4 text-base leading-loose whitespace-pre-wrap md:px-10 md:text-lg">
+      <div className="text-secondary mt-4 text-base leading-loose whitespace-pre-wrap md:text-lg">
         {renderDescription()}
       </div>
 
-      <div className="mx-4 my-4 inline-flex items-center gap-5 md:mx-10">
+      <div className="my-4 inline-flex items-center gap-5">
         <Link href={resumeHref || ""}>
           <Button variant="secondary" className="gap-1" asChild>
             <span>
@@ -83,6 +83,6 @@ export const Hero = ({ resumeUrl }: { resumeUrl?: string }) => {
           </Button>
         </Link>
       </div>
-    </div>
+    </>
   );
 };

@@ -33,6 +33,7 @@ export const getAllSBlogs = async (): Promise<Array<BlogMetadata>> => {
     slug: post.slug.current,
     frontmatter: {
       title: post.title,
+      imagesLink: post.image,
       description: post.description,
       date: post.publishedAt,
       author: post.author,
@@ -47,6 +48,7 @@ export const getSingleSanityBlog = async (
     *[_type == "post" && slug.current == $slug][0] {
       title,
       description,
+      image,
       publishedAt,
       author,
       content
@@ -79,9 +81,10 @@ export const getSingleSanityBlog = async (
     frontmatter: {
       title: post.title,
       description: post.description,
+      imagesLink: post.image,
       date: post.publishedAt,
       author: post.author,
     },
-    content: post.content, // markdown string
+    content: post.content, 
   };
 };

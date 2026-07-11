@@ -12,6 +12,12 @@ export const post = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: "image",
+      title: "Blog Image",
+      type: "image",
+      validation: (Rule) => Rule.required(),
+    }),
 
     defineField({
       name: "slug",
