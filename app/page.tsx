@@ -46,23 +46,23 @@ export default async function Home() {
           <Heading className="md:text-3xl">Experience</Heading>
           <div className="inline-flex w-full justify-between">
             <div className="inline-flex items-center gap-2">
-              <h2 className="text-xl font-bold">Gravity44</h2>
+              <h2 className="text-xl  font-bold">Gravity44</h2>
 
               <span className="inline-flex items-center gap-1.5 rounded-md border border-green-500 bg-green-500/10 px-2 py-1 text-xs font-medium">
                 <span className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
                 Working
               </span>
             </div>
-            <p className="text-secondary text-sm">March 2026 - Present</p>
+            <p className="text-secondary text-xs md:text-sm">March 2026 - Present</p>
           </div>
           <div className="my-1 inline-flex w-full justify-between">
             <p className="text-muted-forground text-base font-medium">
               Frontend Developer
             </p>
-            <p className="text-secondary text-sm">Noida (Remote)</p>
+            <p className="text-secondary text-xs md:text-sm">Noida (Remote)</p>
           </div>
 
-          <ul className="text-secondary max-w-3xl list-disc space-y-2 py-2 pl-5 text-base">
+          <ul className="text-secondary max-w-3xl list-disc space-y-2 py-2 pl-5 text-sm md:text-base">
             {experiencePoints.map((point, index) => (
               <li key={index}>{point}</li>
             ))}
