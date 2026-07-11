@@ -47,7 +47,7 @@ export default async function Blogs({ params }: { params: { slug: string } }) {
   }
 
   const { content, frontmatter } = blogData;
-
+  const blogImageURL = urlFor(frontmatter.imagesLink)?.url()
   return (
     <Container className="min-h-screen pt-24 pb-16">
       <SectionContainer>
@@ -62,9 +62,9 @@ export default async function Blogs({ params }: { params: { slug: string } }) {
           <header className="border-secondary border-b">
             <div className="shadow-custom-inset-shadow rounded-2xl p-2">
               <div className="max-h-110 overflow-hidden rounded-xl">
-                {frontmatter.imagesLink ? (
+                {blogImageURL ? (
                   <Image
-                    src={urlFor(frontmatter.imagesLink)?.url()}
+                    src={blogImageURL}
                     alt={frontmatter.title}
                     width={500}
                     height={500}
@@ -113,8 +113,8 @@ export default async function Blogs({ params }: { params: { slug: string } }) {
                           theme: "github-dark",
                           transformers: [
                             {
-                              pre(node) {
-                                delete node.properties.style;
+                              pre(node: { properties: Record<string, unknown> }) {
+                                delete node.properties.style ;
                               },
                             },
                           ],
