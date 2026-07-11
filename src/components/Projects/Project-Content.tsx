@@ -64,7 +64,7 @@ export const ProjectContents = ({
       </div>
 
       <div className="my-8 flex gap-3 text-base">
-        <Link href={frontmatter.githubLink!}>
+        <Link target="_blank" href={frontmatter.githubLink!}>
           <Button asChild className="gap-2">
             <span>
               <IconBrandGithub className="size-5 stroke-1" />
@@ -73,7 +73,7 @@ export const ProjectContents = ({
           </Button>
         </Link>
         {frontmatter.liveLink && (
-          <Link href={frontmatter.liveLink}>
+          <Link target="_blank" href={frontmatter.liveLink}>
             <Button className="gap-2" asChild variant="secondary">
               {" "}
               <span>

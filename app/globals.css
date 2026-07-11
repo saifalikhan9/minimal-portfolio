@@ -33,8 +33,8 @@
   /* Override the SAME variables */
   --shadow-custom:
     1px 3px 3px -1px rgba(0, 0, 0, 0.3),
-    0px 1px 0px 0px rgba(0, 0, 0, 0.05),
-    0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+    0px 1px 2px 0px var(--color-neutral-600),
+    0px 1px 2px 0px var(--color-neutral-800);
 
   --shadow-sectionInset:
     0px 1px 4px 0px var(--color-neutral-800) inset,
@@ -44,7 +44,7 @@
     0 1px 2px var(--color-neutral-500) inset,
     0 -2px 4px var(--color-neutral-500) inset;
 }
- 
+
 @theme inline {
   --color-background: var(--background);
   --color-primary: var(--primary);
@@ -58,4 +58,6 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-playfair: var(--font-playfair);
+
 }

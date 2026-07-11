@@ -3,15 +3,16 @@ import { truncate } from "@/src/utils/utils";
 import Link from "next/link";
 import { SubHeading } from "../ui/Subheading";
 import { BlogCard } from "../Blogs/BlogsCard";
+import { SectionContainer } from "../ui/SectionContainer";
 
 export default async function BlogsLanding() {
   const blogs = await getAllSBlogs();
   
 
   return (
-    <section className="">
+    <SectionContainer className="">
       <SubHeading className="">I love to write things </SubHeading>
-      <div className="my-4 ml-4 flex flex-col gap-4 md:px-10">
+      <div className="my-4  flex flex-col gap-4 ">
         {blogs
           .sort(
             (a, b) =>
@@ -22,6 +23,6 @@ export default async function BlogsLanding() {
             <BlogCard key={blog.slug ?? idx} frontmatter={blog.frontmatter} slug={blog.slug} />
           ))}
       </div>
-    </section>
+    </SectionContainer>
   );
 }

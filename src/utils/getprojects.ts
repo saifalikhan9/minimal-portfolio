@@ -1,10 +1,12 @@
 import fs from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 import path from "path";
-import type { ProjectContent, ProjectFrontmatter } from "@/src/types/Projects";
+import type { ProjectFrontmatter } from "@/src/types/Projects";
+import { ReactElement } from "react";
+import { BlogComponents } from "../components/Blogs/BlogComponents";
 
 type ProjectData = {
-  content: ProjectContent;
+  content: ReactElement;
   frontmatter: ProjectFrontmatter;
 };
 
@@ -16,7 +18,11 @@ type ProjectMeta = {
 export const getSingleProject = async (
   fileName: string,
 ): Promise<ProjectData | null> => {
-  const filePath = path.join(process.cwd(), "src/data/projects", `${fileName}.mdx`);
+  const filePath = path.join(
+    process.cwd(),
+    "src/data/projects",
+    `${fileName}.mdx`,
+  );
   if (!fs.existsSync(filePath)) {
     return null;
   }
@@ -25,6 +31,8 @@ export const getSingleProject = async (
     const { content, frontmatter } = await compileMDX<ProjectFrontmatter>({
       source: singleProject,
       options: { parseFrontmatter: true },
+      components :BlogComponents
+
     });
     return {
       content,

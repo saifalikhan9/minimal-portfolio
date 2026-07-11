@@ -3,16 +3,15 @@
 import { Container } from "../ui/Container";
 import { githubConfig } from "@/src/config/GithubConfig";
 import { useTheme } from "next-themes";
-import { ActivityCalendar } from "react-activity-calendar"
+import { ActivityCalendar } from "react-activity-calendar";
 import { ContributionItem } from "@/src/server-functions/githubContributions";
 import { useEffect, useState } from "react";
 
-
-
-
-export const GithubLanding = ({ contributions,  }: { contributions: ContributionItem[] }) => {
-
-
+export const GithubLanding = ({
+  contributions,
+}: {
+  contributions: ContributionItem[];
+}) => {
   const { theme } = useTheme();
 
   const [mounted, setMounted] = useState(false);
@@ -25,9 +24,11 @@ export const GithubLanding = ({ contributions,  }: { contributions: Contribution
 
   return (
     <>
-      <Container className="p-3 lg:px-8">
-        <h2 className="text-sm text-muted-forground mb-4 mx-2">Github Contributions</h2>
-        <div className="bg-secondary/10 mx-auto lg:max-w-full rounded-xl p-4">
+      <Container className="px-2 md:px-4">
+        <h2 className="text-muted-forground mx-2 mb-4 text-sm">
+          Github Contributions
+        </h2>
+        <div className="bg-secondary/10 mx-auto rounded-xl p-4 lg:max-w-full">
           <ActivityCalendar
             data={contributions}
             blockSize={11}

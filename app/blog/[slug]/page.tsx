@@ -1,10 +1,18 @@
-
+import rehypeHighlight from "@shikijs/rehype";
 import { getSingleSanityBlog } from "@/src/utils/getSingleBlog";
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { Container } from "@/src/components/ui/Container";
 import Link from "next/link";
-import ReactMarkdown from "react-markdown"
+
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { BlogComponents } from "@/src/components/Blogs/BlogComponents";
+import Image from "next/image";
+
+import { IconCalendarEvent, IconMoodPuzzled } from "@tabler/icons-react";
+import { Button } from "@/src/components/ui/Button";
+import { SectionContainer } from "@/src/components/ui/SectionContainer";
+import { urlFor } from "@/sanity/lib/image";
 
 export async function generateMetadata({
   params,
@@ -39,45 +47,87 @@ export default async function Blogs({ params }: { params: { slug: string } }) {
   }
 
   const { content, frontmatter } = blogData;
-
+  const blogImageURL = urlFor(frontmatter.imagesLink)?.url()
   return (
     <Container className="min-h-screen pt-24 pb-16">
-      <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 md:px-0 ">
-        <Link
-          href="/blog"
-          className="text-xs text-muted-forground hover:text-forground w-fit rounded-full border border-border/40 bg-background/40 px-3 py-1 transition-all duration-200 hover:bg-secondary/10"
-        >
-          ← Back to all blogs
-        </Link>
+      <SectionContainer>
+        <div className="flex w-full flex-col gap-6">
+          <Link
+            href="/blog"
+            className="text-muted-forground hover:text-forground border-border/40 bg-background/40 hover:bg-secondary/10 w-fit rounded-full border px-3 py-1 text-xs transition-all duration-200"
+          >
+            ← Back to Blogs
+          </Link>
 
-        <header className="border-b border-border/40 pb-5">
-          <p className="text-xs uppercase tracking-[0.2em] text-muted-forground">
-            Blog
-          </p>
-          <h1 className="text-forground mt-2 text-2xl font-bold leading-tight md:text-4xl">
-            {frontmatter.title}
-          </h1>
-          <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted-forground">
-            <span>
-              {new Date(frontmatter.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
-            </span>
-            <span className="h-1 w-1 rounded-full bg-muted-forground" />
-            <span>{frontmatter.author}</span>
-          </div>
-          <p className="text-secondary mt-4 text-sm md:text-base">
-            {frontmatter.description}
-          </p>
-        </header>
-        <article className="prose max-w-none dark:prose-invert prose-sm md:prose-base  w-full">
+          <header className="border-secondary border-b">
+            <div className="shadow-custom-inset-shadow rounded-2xl p-2">
+              <div className="max-h-110 overflow-hidden rounded-xl">
+                {blogImageURL ? (
+                  <Image
+                    src={blogImageURL}
+                    alt={frontmatter.title}
+                    width={500}
+                    height={500}
+                    className="block h-auto w-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-100 items-center justify-center">
+                    <div className="flex flex-col items-center">
+                      <IconMoodPuzzled className="size-20" />
+                      <p className="text-xl">Image not found</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
 
-          <ReactMarkdown >{content}</ReactMarkdown>
-        </article>
-
-      </div>
+            <h1 className="font-playfair text-forground my-4 text-4xl font-medium">
+              {frontmatter.title}
+            </h1>
+            <p className="text-muted-forground text-xl">
+              {frontmatter.description}
+            </p>
+            <div className="my-4 flex items-center justify-between">
+              <span className="text-muted-forground inline-flex gap-2">
+                <div className="flex items-center justify-center">
+                  <IconCalendarEvent className="size-6 shrink-0" />
+                </div>
+                <p>{frontmatter.date.toString()}</p>
+              </span>
+              <Button className="px-5" variant="secondary">
+                Share
+              </Button>
+            </div>
+          </header>
+          <article className="">
+            <div className="">
+              <MDXRemote
+                source={content}
+                components={BlogComponents}
+                options={{
+                  mdxOptions: {
+                    rehypePlugins: [
+                      [
+                        rehypeHighlight,
+                        {
+                          theme: "github-dark",
+                          transformers: [
+                            {
+                              pre(node: { properties: Record<string, unknown> }) {
+                                delete node.properties.style ;
+                              },
+                            },
+                          ],
+                        },
+                      ],
+                    ],
+                  },
+                }}
+              />
+            </div>
+          </article>
+        </div>
+      </SectionContainer>
     </Container>
   );
 }

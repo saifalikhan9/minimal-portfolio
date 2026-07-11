@@ -1,10 +1,10 @@
 import * as React from "react";
 import { cn } from "@/src/lib/utils";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
   asChild?: boolean;
+  icon?: React.ReactElement;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -15,12 +15,13 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       type = "button",
       asChild = false,
       children,
+      icon,
       ...props
     },
     ref,
   ) => {
     const base =
-      "inline-flex transition-all duration-200 active:scale-90 text-sm items-center justify-center cursor-pointer rounded-lg px-3 py-2 text-shadow-2xs  transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2";
+      "inline-flex transition-all duration-200 gap-1 active:scale-90 text-sm items-center justify-center cursor-pointer rounded-lg px-3 py-2 text-shadow-2xs  transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2";
     const variants = {
       primary:
         "bg-forground text-primary hover:bg-forground/90 text-shadow-primary/50 ",
@@ -52,6 +53,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
+        {icon && (
+          <span className="flex size-5 items-center justify-between">
+            {icon}
+          </span>
+        )}
         {children}
       </button>
     );

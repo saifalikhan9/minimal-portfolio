@@ -1,20 +1,21 @@
 import { projects } from "@/src/constants/Projects";
 import { ProjectsList } from "../Projects/ProjectsList";
+import { SectionContainer } from "../ui/SectionContainer";
 export default function Projects() {
   const latestProjects = [...projects]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 4);
 
   return (
-    <section
+    <SectionContainer
       id="/projects"
-      className="shadow-sectionInset dark:shadow-sectionInset-dark my-4 px-3 py-4 md:px-10"
+      className="shadow-sectionInset dark:shadow-sectionInset-dark "
     >
-      <p className="text-muted-forground py-2 pb-4 text-sm">
+      <p className="text-muted-forground py-4 text-sm">
         Here are some of my projects that I have worked on.
       </p>
 
       <ProjectsList projects={latestProjects} />
-    </section>
+    </SectionContainer>
   );
 }

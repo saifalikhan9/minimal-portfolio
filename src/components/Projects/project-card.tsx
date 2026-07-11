@@ -29,7 +29,7 @@ export const ProjectCard = ({
   const router = useRouter();
   return (
     <div
-      className="relative px-1 md:px-0"
+      className="relative px-1 md:px-0  border-b-secondary/20 border-b md:border-none "
       onClick={() =>
         router.push(`/projects/${projects.projectDetailsPageSlug}`)
       }
@@ -37,8 +37,8 @@ export const ProjectCard = ({
     >
       {hovered === index && (
         <motion.div
-          layoutId="hovered"
-          id="hovered"
+          layoutId="project-card-hovered"
+          id="project-card-hovered"
           className="shadow-custom-inset-shadow bg-secondary/20 absolute inset-0 -top-2 w-full rounded-xl md:-left-2 md:w-104"
         />
       )}
@@ -108,7 +108,7 @@ const ProjectImage = ({
 }) => {
   return (
     <Image
-      className={cn("min-h-60 w-full rounded-xl object-cover", className)}
+      className={cn("max-h-60 w-full rounded-xl object-cover", className)}
       alt={imageDes}
       width={500}
       height={500}
@@ -138,13 +138,13 @@ const ProjectTextContent = ({
           }}
           className="relative inline-flex gap-2 pt-1"
         >
-          <Link className="text-forground" href={github}>
+          <Link className="text-forground" target="_blank" href={github}>
             {
               <IconBrandGithub className="fill-muted-forground/10 hover:fill-muted-forground/20 size-5 stroke-1" />
             }
           </Link>
           {link && (
-            <Link className="text-forground" href={link}>
+            <Link className="text-forground" target="_blank" href={link}>
               {
                 <IconWorld className="fill-muted-forground/10 hover:fill-muted-forground/20 size-5 stroke-1" />
               }

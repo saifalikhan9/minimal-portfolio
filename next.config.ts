@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["next-mdx-remote"],
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
     remotePatterns: [
       {
@@ -13,6 +13,16 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "saifalikhan99.vercel.app",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
         pathname: "/**",
       },
     ],

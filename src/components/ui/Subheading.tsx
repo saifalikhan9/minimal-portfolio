@@ -22,7 +22,7 @@ export const SubHeading = ({
     >
       <Tag
         className={cn(
-          "text-muted-forground  my-2 max-w-xs px-4 text-base md:max-w-lg md:px-10",
+          "text-muted-forground  my-2 max-w-xs  text-base md:max-w-lg ",
           className,
         )}
       >
