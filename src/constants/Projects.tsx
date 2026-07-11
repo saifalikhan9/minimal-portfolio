@@ -18,7 +18,7 @@ export const projects: Project[] = [
     description:
       "Built an AI-powered knowledge management platform that lets users save content from YouTube, Twitter/X, LinkedIn, and websites. Implemented semantic search using vector embeddings, enabling natural-language retrieval of saved content without relying on exact keywords.",
     imageLink: "/assets/second-brain.png",
-    linkLink: "",
+    linkLink: "https://second-brain-gold-seven.vercel.app",
     technologies: [
       { name: "Next.js", icon: <NextJs key="nextjs" /> },
       { name: "TypeScript", icon: <TypeScript key="typescript" /> },
@@ -27,7 +27,7 @@ export const projects: Project[] = [
       { name: "MongoDB", icon: <MongoDB key="mongodb" /> },
       { name: "Gemini", icon: <Gemini key="gemini" /> },
     ],
-    githubLink: "https://github.com/saifalikhan9/YOUR_REPO",
+    githubLink: "https://github.com/saifalikhan9/second",
     details: true,
     projectDetailsPageSlug: "second-brain",
     isWorking: true,

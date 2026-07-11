@@ -84,20 +84,24 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   </div>
                 </span>
                 <div className="inline-flex gap-2">
-                  <Link target="_blank" href={frontmatter.liveLink!}>
-                    <Button
-                      icon={<IconWorld />}
-                      className="px-5"
-                      variant="secondary"
-                    >
-                      Link
-                    </Button>
-                  </Link>
-                  <Link target="_blank" href={frontmatter.githubLink!}>
-                    <Button icon={<IconBrandGithub />} className="px-5">
-                      Github
-                    </Button>
-                  </Link>
+                  {frontmatter.liveLink && (
+                    <Link target="_blank" href={frontmatter.liveLink}>
+                      <Button
+                        icon={<IconWorld />}
+                        className="px-5"
+                        variant="secondary"
+                      >
+                        Link
+                      </Button>
+                    </Link>
+                  )}
+                  {frontmatter.githubLink && (
+                    <Link target="_blank" href={frontmatter.githubLink}>
+                      <Button icon={<IconBrandGithub />} className="px-5">
+                        Github
+                      </Button>
+                    </Link>
+                  )}
                 </div>
               </div>
             </header>
