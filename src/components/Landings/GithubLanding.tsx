@@ -24,7 +24,7 @@ export const GithubLanding = ({
 
   return (
     <>
-      <Container className="px-2 md:px-4">
+      <Container className="px-2 md:px-8 py-4">
         <h2 className="text-muted-forground mx-2 mb-4 text-sm">
           Github Contributions
         </h2>

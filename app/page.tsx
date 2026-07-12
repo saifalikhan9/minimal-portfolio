@@ -11,19 +11,17 @@ import { Suspense } from "react";
 import { getGithubContributions } from "@/src/server-functions/githubContributions";
 import { Heading } from "@/src/components/ui/Heading";
 import { SectionContainer } from "@/src/components/ui/SectionContainer";
+import { getRandomQuote } from "@/src/utils/getRandomQuotes";
 
 export default async function Home() {
   const siteSettingsPromise = getSiteSettings();
 
-  const quotePromise = getAnimeQuote();
-
   const githubPromise = getGithubContributions();
 
-  const data = await getRandomVerse();
+  const data = getRandomQuote();
 
-  const [siteSettings, quoteData, contributions] = await Promise.all([
+  const [siteSettings, contributions] = await Promise.all([
     siteSettingsPromise,
-    quotePromise,
     githubPromise,
   ]);
   const experiencePoints = [
@@ -40,20 +38,22 @@ export default async function Home() {
           <Hero resumeUrl={siteSettings?.resumeUrl || ""} />
         </SectionContainer>
         {/* experience */}
-        <div className="bg-forground  h-px w-full mask-x-from-10%" />
+        <div className="bg-forground h-px w-full mask-x-from-10%" />
 
         <SectionContainer id="experience">
           <Heading className="md:text-3xl">Experience</Heading>
           <div className="inline-flex w-full justify-between">
             <div className="inline-flex items-center gap-2">
-              <h2 className="text-xl  font-bold">Gravity44</h2>
+              <h2 className="text-xl font-bold">Gravity44</h2>
 
               <span className="inline-flex items-center gap-1.5 rounded-md border border-green-500 bg-green-500/10 px-2 py-1 text-xs font-medium">
                 <span className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
                 Working
               </span>
             </div>
-            <p className="text-secondary text-xs md:text-sm">March 2026 - Present</p>
+            <p className="text-secondary text-xs md:text-sm">
+              March 2026 - Present
+            </p>
           </div>
           <div className="my-1 inline-flex w-full justify-between">
             <p className="text-muted-forground text-base font-medium">
@@ -72,15 +72,8 @@ export default async function Home() {
         <Projects />
         <GithubLanding contributions={contributions} />
         <BlogsLanding />
-        {data != null && (
-          <Quote
-            className="m-2 my-20 max-w-xl md:mx-auto lg:max-w-3xl"
-            surah={data.varse.translation}
-            surahNumber={data.surah.number}
-            surahName={data.surah.name_english}
-            ayah={data.varse.ayah}
-          />
-        )}
+
+        <Quote character={data.character} anime={data.anime} quote={data.quote} className="m-2 my-20 max-w-xl md:mx-auto lg:max-w-3xl" />
 
         <div className="mt-20">
           <Suspense fallback={<div className="h-10" />}>

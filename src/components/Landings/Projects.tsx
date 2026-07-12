@@ -9,7 +9,7 @@ export default function Projects() {
   return (
     <SectionContainer
       id="/projects"
-      className="shadow-sectionInset dark:shadow-sectionInset-dark "
+      className="shadow-sectionInset dark:shadow-sectionInset-dark pb-0"
     >
       <p className="text-muted-forground py-4 text-sm">
         Here are some of my projects that I have worked on.
