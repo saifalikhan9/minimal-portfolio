@@ -33,7 +33,7 @@ export const BlogComponents = {
     [key: string]: unknown;
   }) => (
     <h1
-      className="text-forground font-playfair mb-6 text-3xl font-bold"
+      className="text-forground font-playfair mb-6 text-2xl font-bold md:text-3xl"
       {...props}
     >
       {children}
@@ -46,7 +46,10 @@ export const BlogComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <h2 className="font-playfair mt-14 mb-6 text-3xl font-semibold" {...props}>
+    <h2
+      className="font-playfair text-forground mt-14 mb-5 text-2xl font-semibold tracking-tight md:text-3xl"
+      {...props}
+    >
       {children}
     </h2>
   ),
@@ -58,7 +61,7 @@ export const BlogComponents = {
     [key: string]: unknown;
   }) => (
     <h3
-      className="text-forground/80 mt-10 mb-4 text-xl font-semibold"
+      className="text-forground/80 mt-10 mb-3 text-xl font-medium tracking-tight md:text-2xl"
       {...props}
     >
       {children}
@@ -72,7 +75,7 @@ export const BlogComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <p className="text-secondary mb-4 text-base leading-8" {...props}>
+    <p className="text-secondary mb-6 text-base leading-8" {...props}>
       {children}
     </p>
   ),
@@ -84,7 +87,10 @@ export const BlogComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <ul className="mb-4 ml-6 list-disc space-y-2" {...props}>
+    <ul
+      className="mb-4 ml-6 list-disc space-y-2 text-base"
+      {...props}
+    >
       {children}
     </ul>
   ),
@@ -95,7 +101,10 @@ export const BlogComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <ol className="mb-4 ml-6 list-decimal space-y-3" {...props}>
+    <ol
+      className="mb-4 ml-6 list-decimal space-y-3 text-base"
+      {...props}
+    >
       {children}
     </ol>
   ),
@@ -106,7 +115,7 @@ export const BlogComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <li className="text-muted-foreground leading-7" {...props}>
+    <li className="text-secondary text-base leading-7" {...props}>
       {children}
     </li>
   ),

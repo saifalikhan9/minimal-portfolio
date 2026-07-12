@@ -9,7 +9,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { BlogComponents } from "@/src/components/Blogs/BlogComponents";
 import Image from "next/image";
 
-import { IconCalendarEvent, IconMoodPuzzled } from "@tabler/icons-react";
+import { IconCalendarEvent, IconMoodPuzzled, IconShare } from "@tabler/icons-react";
 import { Button } from "@/src/components/ui/Button";
 import { SectionContainer } from "@/src/components/ui/SectionContainer";
 import { urlFor } from "@/sanity/lib/image";
@@ -47,7 +47,7 @@ export default async function Blogs({ params }: { params: { slug: string } }) {
   }
 
   const { content, frontmatter } = blogData;
-  const blogImageURL = urlFor(frontmatter.imagesLink)?.url()
+  const blogImageURL = urlFor(frontmatter.imagesLink)?.url();
   return (
     <Container className="min-h-screen pt-24 pb-16">
       <SectionContainer>
@@ -81,20 +81,22 @@ export default async function Blogs({ params }: { params: { slug: string } }) {
               </div>
             </div>
 
-            <h1 className="font-playfair text-forground my-4 text-4xl font-medium">
+            <h1 className="font-playfair text-forground my-4 text-3xl font-semibold md:text-4xl">
               {frontmatter.title}
             </h1>
-            <p className="text-muted-forground text-xl">
+            <p className="text-muted-forground text-base md:text-lg font-normal">
               {frontmatter.description}
             </p>
             <div className="my-4 flex items-center justify-between">
               <span className="text-muted-forground inline-flex gap-2">
                 <div className="flex items-center justify-center">
-                  <IconCalendarEvent className="size-6 shrink-0" />
+                  <IconCalendarEvent className="md:size-6 size-5 shrink-0" />
                 </div>
-                <p>{frontmatter.date.toString()}</p>
+                <p className="text-sm md:text-base">
+                  {frontmatter.date.toString()}
+                </p>
               </span>
-              <Button className="px-5" variant="secondary">
+              <Button icon={<IconShare className="size-4 "/>} className="" variant="secondary">
                 Share
               </Button>
             </div>
@@ -113,8 +115,10 @@ export default async function Blogs({ params }: { params: { slug: string } }) {
                           theme: "github-dark",
                           transformers: [
                             {
-                              pre(node: { properties: Record<string, unknown> }) {
-                                delete node.properties.style ;
+                              pre(node: {
+                                properties: Record<string, unknown>;
+                              }) {
+                                delete node.properties.style;
                               },
                             },
                           ],

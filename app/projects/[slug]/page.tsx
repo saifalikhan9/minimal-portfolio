@@ -71,10 +71,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </div>
               </div>
 
-              <h1 className="font-playfair text-forground my-4 text-4xl font-medium">
+              <h1 className="font-playfair text-forground my-4 text-3xl font-semibold md:text-4xl">
                 {frontmatter.title}
               </h1>
-              <p className="text-muted-forground text-xl">
+              <p className="text-muted-forground text-base md:text-lg font-normal">
                 {frontmatter.description}
               </p>
               <div className="my-4 flex items-center justify-between">

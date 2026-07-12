@@ -10,7 +10,7 @@ import { SubHeading } from "../ui/Subheading";
 export const Footer = () => {
   return (
     <footer className="">
-      <Container className="px4 flex items-center justify-between py-4 md:px-10">
+      <Container className="px-4 flex items-center justify-between py-4 md:px-10">
         <div className="shadow-sectionInset dark:shadow-sectionInset-dark absolute inset-0 left-0 h-full w-full border-t border-neutral-300 dark:border-neutral-700" />
 
         <SubHeading>Built with love by Saif Ali Khan</SubHeading>
