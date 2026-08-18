@@ -64,7 +64,7 @@ export const Hero = ({ resumeUrl }: { resumeUrl?: string }) => {
       </div>
 
       <div className="my-4 inline-flex items-center gap-5">
-        <Link href={resumeHref || ""}>
+        <Link target={"_blank"} href={resumeHref || ""}>
           <Button variant="secondary" className="gap-1" asChild>
             <span>
               {
