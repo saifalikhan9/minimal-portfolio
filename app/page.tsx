@@ -51,7 +51,7 @@ export default async function Home() {
               </span> */}
             </div>
             <p className="text-secondary text-xs md:text-sm">
-              March 2026 - July 2026
+              March 2026 - Aug 2026
             </p>
           </div>
           <div className="my-1 inline-flex w-full justify-between">
