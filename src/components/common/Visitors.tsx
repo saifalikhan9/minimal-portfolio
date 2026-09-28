@@ -3,8 +3,6 @@ import { Container } from "../ui/Container";
 import { getCount } from "@/src/server-functions/getVisitors";
 
 export async function Visitors() {
-  // const count = await getVisitorsCount();
-  // console.log(count,"this is the count of the visitors")
   const count = await getCount();
 
   return (

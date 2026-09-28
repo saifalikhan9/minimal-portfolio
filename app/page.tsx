@@ -23,6 +23,7 @@ export default async function Home() {
     siteSettingsPromise,
     githubPromise,
   ]);
+
   const experiencePoints = [
     "Developed and maintained web applications using Next.js, Tailwind CSS, and Framer Motion, ensuring seamless experiences across desktop, tablet, and mobile devices.",
 
@@ -63,7 +64,9 @@ export default async function Home() {
 
           <ul className="text-secondary max-w-3xl list-disc space-y-2 py-2 pl-5 text-sm md:text-base">
             {experiencePoints.map((point, index) => (
-              <li key={index} className={index === 1 ?"font-bold":""}  >{point}</li>
+              <li key={index} className={index === 1 ? "font-bold" : ""}>
+                {point}
+              </li>
             ))}
           </ul>
         </SectionContainer>
@@ -72,7 +75,12 @@ export default async function Home() {
         <GithubLanding contributions={contributions} />
         <BlogsLanding />
 
-        <Quote character={data.character} anime={data.anime} quote={data.quote} className="m-2 my-20 max-w-xl md:mx-auto lg:max-w-3xl" />
+        <Quote
+          character={data.character}
+          anime={data.anime}
+          quote={data.quote}
+          className="m-2 my-20 max-w-xl md:mx-auto lg:max-w-3xl"
+        />
 
         <div className="mt-20">
           <Suspense fallback={<div className="h-10" />}>

@@ -2,7 +2,7 @@
 
 import { unstable_cache } from "next/cache";
 import { githubConfig } from "@/src/config/GithubConfig";
-import { filterLastYear } from "../utils/getYear";
+// import { filterLastYear } from "../utils/getYear";
 
 export type ContributionItem = {
   date: string;
@@ -23,8 +23,10 @@ export type GitHubContributionResponse = {
 
 async function fetchGithub(): Promise<ContributionItem[]> {
   const res = await fetch(
-    `${githubConfig.apiUrl}/${githubConfig.username}.json`,
-    { next: { revalidate: 3600 } }
+    `${githubConfig.apiUrl}/${githubConfig.username}?y=last`,
+    {
+      next: { revalidate: 3600 },
+    },
   );
 
   if (!res.ok) {
@@ -34,44 +36,29 @@ async function fetchGithub(): Promise<ContributionItem[]> {
 
   const data: { contributions?: unknown[] } = await res.json();
 
-  if (!data?.contributions || !Array.isArray(data.contributions)) {
+  if (!Array.isArray(data.contributions)) {
     return [];
   }
 
-  const flat = data.contributions.flat();
-
-  const levelMap: Record<
-    GitHubContributionResponse["contributionLevel"],
-    ContributionItem["level"]
-  > = {
-    NONE: 0,
-    FIRST_QUARTILE: 1,
-    SECOND_QUARTILE: 2,
-    THIRD_QUARTILE: 3,
-    FOURTH_QUARTILE: 4,
-  };
-
-  const valid: ContributionItem[] = flat
-    .filter((item: unknown): item is GitHubContributionResponse => {
+  const contributions = data.contributions.filter(
+    (item): item is ContributionItem => {
       if (!item || typeof item !== "object") return false;
-      const i = item as Partial<GitHubContributionResponse>;
+
+      const i = item as Partial<ContributionItem>;
+
       return (
         typeof i.date === "string" &&
-        typeof i.contributionLevel === "string" &&
-        typeof i.contributionCount === "number"
+        typeof i.count === "number" &&
+        typeof i.level === "number"
       );
-    })
-    .map((i) => ({
-      date: i.date,
-      count: i.contributionCount,
-      level: levelMap[i.contributionLevel],
-    }));
+    },
+  );
 
-  return filterLastYear(valid);
+  return contributions;
 }
 
 export const getGithubContributions = unstable_cache(
   fetchGithub,
   ["github-contributions"],
-  { revalidate: 3600 }
+  { revalidate: 3600 },
 );

@@ -22,9 +22,10 @@ export const GithubLanding = ({
 
   if (!mounted || !contributions?.length) return null;
 
+
   return (
     <>
-      <Container className="px-2 md:px-8 py-4">
+      <Container className="px-2 py-4 md:px-8">
         <h2 className="text-muted-forground mx-2 mb-4 text-sm">
           Github Contributions
         </h2>
