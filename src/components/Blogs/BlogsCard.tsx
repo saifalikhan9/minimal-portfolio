@@ -1,19 +1,19 @@
-import { BlogMetadata } from "@/src/types/Blogs";
+import { Blog } from "@/src/utils/sanityFetch";
 import { truncate } from "@/src/utils/utils";
 import { Link } from "next-view-transitions";
 
-export const BlogCard: React.FC<BlogMetadata> = ({ frontmatter, slug }) => (
+export const BlogCard: React.FC<{ posts: Blog }> = ({ posts }) => (
   <>
     <Link
-      href={`/blog/${slug}`}
+      href={`/blog/${posts.slug.current}`}
       className="hover:bg-secondary/10 rounded p-2 transition-all duration-200 ease-in-out hover:scale-101"
     >
       <div className="items-center justify-between">
-        <BlogDate date={frontmatter.date} />
-        <Title>{frontmatter.title}</Title>
+        <BlogDate date={posts.publishedAt} />
+        <Title>{posts.title}</Title>
       </div>
 
-      <Description>{truncate(frontmatter.description, 150)}</Description>
+      <Description>{truncate(posts.description, 150)}</Description>
     </Link>
     <div className="bg-secondary/50 h-px w-full mask-r-from-80 mask-l-from-80" />
   </>

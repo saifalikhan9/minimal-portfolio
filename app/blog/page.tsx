@@ -3,7 +3,7 @@ import { Container } from "@/src/components/ui/Container";
 import { Heading } from "@/src/components/ui/Heading";
 import { SectionContainer } from "@/src/components/ui/SectionContainer";
 import { getPageMetadata } from "@/src/config/Meta";
-import { getAllSBlogs } from "@/src/utils/getSingleBlog";
+import { getAllBlogs } from "@/src/utils/sanityFetch";
 import { Metadata } from "next";
 import { Robots } from "next/dist/lib/metadata/types/metadata-types";
 
@@ -26,26 +26,22 @@ export const generateMetadata = (): Metadata => {
 };
 
 export default async function BlogPost() {
-  const allblogs = await getAllSBlogs();
+  const allblogs = await getAllBlogs();
 
   return (
     <Container className="min-h-screen pt-20">
       <SectionContainer>
         <Heading>All Blogs </Heading>
 
-        <div className="flex flex-col gap-4 ">
+        <div className="flex flex-col gap-4">
           {allblogs
             .sort(
               (a, b) =>
-                new Date(b.frontmatter.date).getTime() -
-                new Date(a.frontmatter.date).getTime(),
+                new Date(b.publishedAt).getTime() -
+                new Date(a.publishedAt).getTime(),
             )
             .map((blog, idx) => (
-              <BlogCard
-                key={blog.slug ?? idx}
-                frontmatter={blog.frontmatter}
-                slug={blog.slug}
-              />
+              <BlogCard key={blog.slug.current ?? idx} posts={blog} />
             ))}
         </div>
       </SectionContainer>

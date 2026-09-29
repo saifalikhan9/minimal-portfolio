@@ -12,6 +12,5 @@ export type BlogData = {
 };
 
 export type BlogMetadata = {
-  frontmatter: BlogFrontmatter;
-  slug: string;
+ 
 };
